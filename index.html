@@ -3,13 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    // A reload returns to the cover before the content is painted.
-    if (window.self === window.top && performance.getEntriesByType('navigation')[0]?.type === 'reload') {
-      location.replace('unipedia.html');
-    }
-  </script>
-  <title>UNIPEDIA — Content</title>
+  <title>Content</title>
   <link rel="stylesheet" href="fonts/abc-rom.css">
   <style>
     * { box-sizing: border-box; }
@@ -31,9 +25,8 @@
 
     .circles {
       position: absolute;
-      top: 50%;
+      top: 32px;
       left: 32px;
-      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -155,7 +148,7 @@
   </style>
 </head>
 <body>
-  <main class="content-page" aria-label="UNIPEDIA content">
+  <main class="content-page" aria-label="Content">
     <ul class="circles">
       <li class="content-item"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label">Intro</span></button></li>
       <li class="content-item"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label">For Unicode</span></button></li>
