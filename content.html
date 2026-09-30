@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // A reload returns to the cover before the content is painted.
+    if (window.self === window.top && performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+      location.replace('unipedia.html');
+    }
+  </script>
+  <title>UNIPEDIA — Content</title>
+  <link rel="stylesheet" href="fonts/abc-rom.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-family: "ABC ROM", sans-serif;
+      font-weight: 500;
+    }
+
+    .content-page {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: max(100svh, 376px);
+    }
+
+    .circles {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .content-item {
+      position: relative;
+    }
+
+    .item-label {
+      font-weight: 400;
+      text-align: left;
+      font-size: 24px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .circle {
+      display: block;
+      width: 17px;
+      height: 17px;
+      border: 2px solid #000;
+      border-radius: 50%;
+    }
+
+    .corner-frame {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 650px;
+      height: 850px;
+      background: transparent;
+
+    }
+
+    .frame-corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 0 solid #000;
+    }
+
+    .top-left { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+    .top-right { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+    .bottom-left { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+    .bottom-right { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+
+    .frame-triangle {
+      position: absolute;
+      background: #000;
+    }
+
+    .triangle-top, .triangle-bottom {
+      width: 25px;
+      height: 21.650635px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .triangle-top {
+      bottom: calc(100% + 20px);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .triangle-bottom {
+      top: calc(100% + 20px);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+
+    .triangle-left, .triangle-right {
+      width: 21.650635px;
+      height: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .triangle-left {
+      right: calc(100% + 20px);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    }
+
+    .triangle-right {
+      left: calc(100% + 20px);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+    }
+
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .directory-button {
+      border: 0;
+      padding: 0;
+      background: none;
+      display: grid;
+      grid-template-columns: 17px auto;
+      column-gap: calc(50px / 3);
+      align-items: start;
+    }
+    .directory-button .circle { margin-top: calc((24px * 1.2 - 17px) / 2); }
+    .directory-button[aria-current="page"] .circle { background: #000; }
+    .frame-triangle { border: 0; padding: 0; }
+    .frame-triangle:disabled { opacity: .2; cursor: default; }
+    button:focus-visible, a:focus-visible { outline: 2px solid #777; outline-offset: 5px; }
+    .page-viewport { position: absolute; inset: 0; overflow: hidden; }
+    .page-content { position: absolute; inset: 0; background: white; height: 100%; padding: clamp(20px, 5vw, 56px); overflow: auto; }
+    .page-content footer { position: absolute; left: 10px; top: 10px; margin: 0; font-size: 18px; line-height: 1; }
+    .corner-frame {
+      width: min(650px, calc(100vw - 120px), calc((100svh - 120px) * 650 / 850));
+      height: auto;
+      aspect-ratio: 650 / 850;
+    }
+    .content-page { min-height: max(100svh, 360px); }
+    @media (max-width: 1699px) { .circles { display: none; } }
+    @media (max-height: 359px) {
+      .corner-frame { width: min(650px, calc(100vw - 120px), 183px); }
+    }
+  </style>
+</head>
+<body>
+  <main class="content-page" aria-label="UNIPEDIA content">
+    <ul class="circles">
+      <li class="content-item"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label">Intro</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label">For Unicode</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label">For Hexadecimal Code</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label">For Ideographic<br>Description Symbols</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label">*Drafts</span></button></li>
+    </ul>
+    <div class="corner-frame">
+      <div class="page-viewport">
+      <article class="page-content" aria-live="polite" aria-atomic="true">
+        <div class="page-body"></div>
+        <footer><span id="page-number">01 / 05</span></footer>
+      </article>
+      </div>
+      <span class="frame-corner top-left"></span>
+      <span class="frame-corner top-right"></span>
+      <span class="frame-corner bottom-left"></span>
+      <span class="frame-corner bottom-right"></span>
+      <button class="frame-triangle triangle-top" data-step="-1" aria-label="Previous section"></button>
+      <button class="frame-triangle triangle-bottom" data-step="1" aria-label="Next section"></button>
+      <button class="frame-triangle triangle-left" data-step="-1" aria-label="Previous content"></button>
+      <button class="frame-triangle triangle-right" data-step="1" aria-label="Next content"></button>
+    </div>
+  </main>
+<script>
+    const titles = ['Intro', 'For Unicode', 'For Hexadecimal Code', 'For Ideographic Description Symbols', '*Drafts'];
+    // Replace each empty string with the content for that section's slide.
+    const sections = titles.map(title => ({ title, slides: ['', ''] }));
+    let currentPage = 0;
+    let currentSlide = 0;
+    function renderPage(index, slide = 0) {
+      currentPage = Math.max(0, Math.min(titles.length - 1, index));
+      currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
+      document.querySelector('.page-body').textContent = sections[currentPage].slides[currentSlide];
+      document.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
+      document.getElementById('page-number').textContent = `${String(currentPage + 1).padStart(2, '0')} / 05`;
+      document.querySelector('.page-content').scrollTop = 0;
+      document.querySelectorAll('[data-page]').forEach(button => {
+        if (Number(button.dataset.page) === currentPage) button.setAttribute('aria-current', 'page');
+        else button.removeAttribute('aria-current');
+      });
+      document.querySelectorAll('[data-step]').forEach(button => {
+        const horizontal = button.classList.contains('triangle-left') || button.classList.contains('triangle-right');
+        const position = horizontal ? currentSlide : currentPage;
+        const count = horizontal ? sections[currentPage].slides.length : sections.length;
+        button.disabled = Number(button.dataset.step) < 0 ? position === 0 : position === count - 1;
+      });
+    }
+    let turning = false;
+    async function showPage(index, direction, slide = 0) {
+      const next = Math.max(0, Math.min(titles.length - 1, index));
+      const nextSlide = Math.max(0, Math.min(sections[next].slides.length - 1, slide));
+      if (turning || (next === currentPage && nextSlide === currentSlide)) return;
+      direction ||= next > currentPage ? 'bottom' : 'top';
+      const page = document.querySelector('.page-content');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        renderPage(next, nextSlide);
+        return;
+      }
+      const vectors = { right: [100, 0], left: [-100, 0], top: [0, -100], bottom: [0, 100] };
+      const [x, y] = vectors[direction];
+      const outgoing = page.cloneNode(true);
+      outgoing.removeAttribute('aria-live');
+      outgoing.setAttribute('aria-hidden', 'true');
+      outgoing.inert = true;
+      outgoing.removeAttribute('id');
+      outgoing.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+      page.parentElement.append(outgoing);
+      outgoing.scrollTop = page.scrollTop;
+      turning = true;
+      const animations = [];
+      try {
+        renderPage(next, nextSlide);
+        const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
+        animations.push(outgoing.animate([
+          { transform: 'translate(0, 0)' },
+          { transform: `translate(${-x}%, ${-y}%)` }
+        ], options));
+        animations.push(page.animate([
+          { transform: `translate(${x}%, ${y}%)` },
+          { transform: 'translate(0, 0)' }
+        ], options));
+        await Promise.all(animations.map(animation => animation.finished));
+      } finally {
+        outgoing.remove();
+        animations.forEach(animation => animation.cancel());
+        turning = false;
+      }
+    }
+    function navigate(direction) {
+      if (direction === 'left' || direction === 'right') {
+        showPage(currentPage, direction, currentSlide + (direction === 'left' ? -1 : 1));
+      } else {
+        showPage(currentPage + (direction === 'top' ? -1 : 1), direction, 0);
+      }
+    }
+    document.querySelectorAll('[data-page]').forEach(button => button.addEventListener('click', () => {
+      const section = Number(button.dataset.page);
+      if (section !== currentPage) showPage(section);
+    }));
+    document.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => {
+      navigate(['top', 'bottom', 'left', 'right'].find(direction => button.classList.contains(`triangle-${direction}`)));
+    }));
+    document.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      const direction = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'top', ArrowDown: 'bottom' }[event.key];
+      if (direction) {
+        event.preventDefault();
+        navigate(direction);
+      }
+    });
+    renderPage(0);
+  </script>
+</body>
+</html>

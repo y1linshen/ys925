@@ -1,0 +1,125 @@
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Black-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Black-Trial.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-BlackItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-BlackItalic-Trial.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Bold-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Bold-Trial.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-BoldItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-BoldItalic-Trial.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Book-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Book-Trial.woff") format("woff");
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-BookItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-BookItalic-Trial.woff") format("woff");
+  font-weight: 450;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Heavy-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Heavy-Trial.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-HeavyItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-HeavyItalic-Trial.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Light-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Light-Trial.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-LightItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-LightItalic-Trial.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Medium-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Medium-Trial.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-MediumItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-MediumItalic-Trial.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-Regular-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-Regular-Trial.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ABC ROM";
+  src: url("abc-rom/ABCROM-RegularItalic-Trial.woff2") format("woff2"),
+       url("abc-rom/ABCROM-RegularItalic-Trial.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
