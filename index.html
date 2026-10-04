@@ -139,18 +139,31 @@
     .directory-button .circle { margin-top: calc((24px * 1.2 - 17px) / 2); }
     .directory-button[aria-current="page"] .circle,
     .directory-button:hover .circle,
-    .directory-button:focus-visible .circle,
-    .view-toggle[aria-expanded="true"] .circle { background: #000; }
+    .directory-button:focus-visible .circle { background: #000; }
     .circle { transition: background-color 150ms ease; }
     .about-page {
       position: absolute;
       inset: 0;
       z-index: 2;
       background: white;
+      overflow-y: auto;
+      overscroll-behavior: contain;
       transform: translateY(-100%);
       visibility: hidden;
       transition: transform 500ms ease-in-out, visibility 0s 500ms;
     }
+    .about-body {
+      margin-left: 25%;
+      width: 75%;
+      padding: 32px 32px 32px 0;
+      font-family: "ABC ROM", sans-serif;
+      font-weight: 500;
+      font-size: 10vw;
+      line-height: 1.1;
+      overflow-wrap: break-word;
+    }
+    .about-body p { margin: 0 0 1em; }
+    .about-body p:last-child { margin-bottom: 0; }
     .content-page.is-about .about-page {
       transform: translateY(0);
       visibility: visible;
@@ -164,8 +177,11 @@
     .frame-triangle:disabled { opacity: .2; cursor: default; }
     button:focus-visible, a:focus-visible { outline: 2px solid #777; outline-offset: 5px; }
     .page-viewport { position: absolute; inset: 0; overflow: hidden; }
-    .page-content { position: absolute; inset: 0; background: white; height: 100%; padding: clamp(20px, 5vw, 56px); overflow: auto; }
-    .page-content footer { position: absolute; left: 10px; top: 10px; margin: 0; font-size: 18px; line-height: 1; }
+    .page-content { position: absolute; inset: 0; background: transparent; height: 100%; padding: clamp(20px, 5vw, 56px); overflow: auto; }
+    .frame-pagination { position: absolute; left: 10px; top: 10px; margin: 0; font-size: 18px; line-height: 1; display: flex; gap: 0.25em; }
+    .page-number-window { position: relative; display: inline-block; width: 2ch; height: 1em; overflow: hidden; }
+    .page-number-window span { position: absolute; inset: 0; font-variant-numeric: tabular-nums; }
+    .page-body { position: relative; }
     .corner-frame {
       width: min(650px, calc(100vw - 120px), calc((100svh - 120px) * 650 / 850));
       height: auto;
@@ -183,8 +199,8 @@
       font-weight: 500;
       font-size: var(--section-number-size);
       line-height: 1;
-      color: #000;
-      opacity: 0.5;
+      color: #bfbfbf;
+      opacity: 0.25;
       pointer-events: none;
     }
     .section-number[data-number="1"] { transform: translateX(-5%); }
@@ -204,16 +220,19 @@
       <li class="content-item section-entry"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>5</span><span>_ Drafts</span></span></button></li>
     </ul>
     <section class="about-page" id="about-page" aria-label="About" aria-hidden="true" inert>
-      <div class="about-body"></div>
+      <div class="about-body">
+        <p>This website documents Yilin Shen’s ongoing exploration of Unicode.</p>
+        <p>Begun in October 2024, the project examines the principles and algorithms underlying Unicode, while exploring how the medium itself shapes meaning. Both strands approach Unicode as a working language.</p>
+      </div>
     </section>
     <div class="corner-frame">
       <div class="page-viewport">
+      <div class="section-number" data-number="1" aria-hidden="true">1</div>
       <article class="page-content" aria-live="polite" aria-atomic="true">
-        <div class="section-number" data-number="1" aria-hidden="true">1</div>
         <div class="page-body"></div>
-        <footer><span id="page-number">01 / 05</span></footer>
       </article>
       </div>
+      <footer class="frame-pagination" aria-label="Section 1 of 5"><span class="page-number-window"><span id="page-number">01</span></span><span class="page-total">/05</span></footer>
       <span class="frame-corner top-left"></span>
       <span class="frame-corner top-right"></span>
       <span class="frame-corner bottom-left"></span>
@@ -233,12 +252,13 @@
     function renderPage(index, slide = 0) {
       currentPage = Math.max(0, Math.min(titles.length - 1, index));
       currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
-      const number = document.querySelector('.page-content .section-number');
+      const number = document.querySelector('.section-number');
       number.textContent = currentPage + 1;
       number.dataset.number = currentPage + 1;
       document.querySelector('.page-body').textContent = sections[currentPage].slides[currentSlide];
       document.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
-      document.getElementById('page-number').textContent = `${String(currentPage + 1).padStart(2, '0')} / 05`;
+      document.getElementById('page-number').textContent = String(currentPage + 1).padStart(2, '0');
+      document.querySelector('.frame-pagination').setAttribute('aria-label', `Section ${currentPage + 1} of 5`);
       document.querySelector('.page-content').scrollTop = 0;
       document.querySelectorAll('[data-page]').forEach(button => {
         if (Number(button.dataset.page) === currentPage) button.setAttribute('aria-current', 'page');
@@ -258,6 +278,9 @@
       if (turning || (next === currentPage && nextSlide === currentSlide)) return;
       direction ||= next > currentPage ? 'bottom' : 'top';
       const page = document.querySelector('.page-content');
+      const pageNumber = document.getElementById('page-number');
+      const changesSection = next !== currentPage;
+      const previousNumber = pageNumber.textContent;
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         renderPage(next, nextSlide);
         return;
@@ -274,6 +297,7 @@
       outgoing.scrollTop = page.scrollTop;
       turning = true;
       const animations = [];
+      let outgoingNumber;
       try {
         renderPage(next, nextSlide);
         const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
@@ -285,9 +309,25 @@
           { transform: `translate(${x}%, ${y}%)` },
           { transform: 'translate(0, 0)' }
         ], options));
+        if (changesSection) {
+          outgoingNumber = pageNumber.cloneNode(true);
+          outgoingNumber.removeAttribute('id');
+          outgoingNumber.setAttribute('aria-hidden', 'true');
+          outgoingNumber.textContent = previousNumber;
+          pageNumber.parentElement.append(outgoingNumber);
+          animations.push(outgoingNumber.animate([
+            { transform: 'translate(0, 0)' },
+            { transform: `translate(${-x}%, ${-y}%)` }
+          ], options));
+          animations.push(pageNumber.animate([
+            { transform: `translate(${x}%, ${y}%)` },
+            { transform: 'translate(0, 0)' }
+          ], options));
+        }
         await Promise.all(animations.map(animation => animation.finished));
       } finally {
         outgoing.remove();
+        outgoingNumber?.remove();
         animations.forEach(animation => animation.cancel());
         turning = false;
       }
@@ -308,7 +348,7 @@
       navigate(['top', 'bottom', 'left', 'right'].find(direction => button.classList.contains(`triangle-${direction}`)));
     }));
     document.addEventListener('keydown', event => {
-      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (aboutOpen || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       const direction = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'top', ArrowDown: 'bottom' }[event.key];
       if (direction) {
         event.preventDefault();
