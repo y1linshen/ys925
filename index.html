@@ -29,7 +29,7 @@
       left: 32px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 7px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -40,7 +40,7 @@
     }
 
     .item-label {
-      font-weight: 400;
+      font-weight: 500;
       text-align: left;
       font-size: 24px;
       line-height: 1.2;
@@ -141,7 +141,20 @@
       aspect-ratio: 650 / 850;
     }
     .content-page { min-height: max(100svh, 360px); }
-    @media (max-width: 1699px) { .circles { display: none; } }
+    .circles.is-obscured { visibility: hidden; }
+    .section-number {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "ABC ROM", sans-serif;
+      font-weight: 500;
+      font-size: var(--section-number-size);
+      line-height: 1;
+      color: #bfbfbf;
+      pointer-events: none;
+    }
     @media (max-height: 359px) {
       .corner-frame { width: min(650px, calc(100vw - 120px), 183px); }
     }
@@ -150,15 +163,16 @@
 <body>
   <main class="content-page" aria-label="Content">
     <ul class="circles">
-      <li class="content-item"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label">Intro</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label">For Unicode</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label">For Hexadecimal Code</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label">For Ideographic<br>Description Symbols</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label">*Drafts</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label">1 Unicode</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label">2 _Self</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label">3 _Hexadecimal Code</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label">4 _Ideographic<br>Description Symbols</span></button></li>
+      <li class="content-item"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label">5 _ Drafts</span></button></li>
     </ul>
     <div class="corner-frame">
       <div class="page-viewport">
       <article class="page-content" aria-live="polite" aria-atomic="true">
+        <div class="section-number" aria-hidden="true">1</div>
         <div class="page-body"></div>
         <footer><span id="page-number">01 / 05</span></footer>
       </article>
@@ -174,7 +188,7 @@
     </div>
   </main>
 <script>
-    const titles = ['Intro', 'For Unicode', 'For Hexadecimal Code', 'For Ideographic Description Symbols', '*Drafts'];
+    const titles = ['1 Unicode', '2 _Self', '3 _Hexadecimal Code', '4 _Ideographic Description Symbols', '5 _ Drafts'];
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
     let currentPage = 0;
@@ -182,6 +196,7 @@
     function renderPage(index, slide = 0) {
       currentPage = Math.max(0, Math.min(titles.length - 1, index));
       currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
+      document.querySelector('.page-content .section-number').textContent = currentPage + 1;
       document.querySelector('.page-body').textContent = sections[currentPage].slides[currentSlide];
       document.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
       document.getElementById('page-number').textContent = `${String(currentPage + 1).padStart(2, '0')} / 05`;
@@ -260,6 +275,27 @@
         navigate(direction);
       }
     });
+    const frame = document.querySelector('.corner-frame');
+    const directory = document.querySelector('.circles');
+    function updateLayout() {
+      const frameBounds = frame.getBoundingClientRect();
+      frame.style.setProperty('--section-number-size', `${frameBounds.height * 0.8}px`);
+      // Visibility preserves layout so hidden entries can still be measured.
+      const overlaps = [...directory.querySelectorAll('.directory-button')].some(button => {
+        const bounds = button.getBoundingClientRect();
+        return bounds.right >= frameBounds.left && bounds.left <= frameBounds.right
+          && bounds.bottom >= frameBounds.top && bounds.top <= frameBounds.bottom;
+      });
+      directory.classList.toggle('is-obscured', overlaps);
+      directory.inert = overlaps;
+    }
+    const layoutObserver = new ResizeObserver(updateLayout);
+    layoutObserver.observe(document.querySelector('.content-page'));
+    layoutObserver.observe(frame);
+    layoutObserver.observe(directory);
+    window.addEventListener('resize', updateLayout);
+    document.fonts.ready.then(updateLayout);
+    updateLayout();
     renderPage(0);
   </script>
 </body>
