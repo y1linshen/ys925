@@ -33,6 +33,9 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      transform: scale(1.2);
+      transform-origin: top left;
+      z-index: 3;
     }
 
     .content-item {
@@ -45,6 +48,12 @@
       font-size: 24px;
       line-height: 1.2;
       white-space: nowrap;
+    }
+
+    .numbered-label {
+      display: grid;
+      grid-template-columns: 1ch auto;
+      column-gap: 0.75em;
     }
 
     .circle {
@@ -128,7 +137,29 @@
       align-items: start;
     }
     .directory-button .circle { margin-top: calc((24px * 1.2 - 17px) / 2); }
-    .directory-button[aria-current="page"] .circle { background: #000; }
+    .directory-button[aria-current="page"] .circle,
+    .directory-button:hover .circle,
+    .directory-button:focus-visible .circle,
+    .view-toggle[aria-expanded="true"] .circle { background: #000; }
+    .circle { transition: background-color 150ms ease; }
+    .about-page {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: white;
+      transform: translateY(-100%);
+      visibility: hidden;
+      transition: transform 500ms ease-in-out, visibility 0s 500ms;
+    }
+    .content-page.is-about .about-page {
+      transform: translateY(0);
+      visibility: visible;
+      transition-delay: 0s;
+    }
+    .content-page.is-about .section-entry { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .about-page, .circle { transition: none; }
+    }
     .frame-triangle { border: 0; padding: 0; }
     .frame-triangle:disabled { opacity: .2; cursor: default; }
     button:focus-visible, a:focus-visible { outline: 2px solid #777; outline-offset: 5px; }
@@ -141,7 +172,7 @@
       aspect-ratio: 650 / 850;
     }
     .content-page { min-height: max(100svh, 360px); }
-    .circles.is-obscured { visibility: hidden; }
+    .circles.is-obscured .section-entry { visibility: hidden; }
     .section-number {
       position: absolute;
       inset: 0;
@@ -152,9 +183,11 @@
       font-weight: 500;
       font-size: var(--section-number-size);
       line-height: 1;
-      color: #bfbfbf;
+      color: #000;
+      opacity: 0.5;
       pointer-events: none;
     }
+    .section-number[data-number="1"] { transform: translateX(-5%); }
     @media (max-height: 359px) {
       .corner-frame { width: min(650px, calc(100vw - 120px), 183px); }
     }
@@ -163,16 +196,20 @@
 <body>
   <main class="content-page" aria-label="Content">
     <ul class="circles">
-      <li class="content-item"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label">1 Unicode</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label">2 _Self</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label">3 _Hexadecimal Code</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label">4 _Ideographic<br>Description Symbols</span></button></li>
-      <li class="content-item"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label">5 _ Drafts</span></button></li>
+      <li class="content-item"><button class="directory-button view-toggle" aria-expanded="false" aria-controls="about-page"><span class="circle" aria-hidden="true"></span><span class="item-label">About</span></button></li>
+      <li class="content-item section-entry"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>1</span><span>Unicode</span></span></button></li>
+      <li class="content-item section-entry"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>2</span><span>_Self</span></span></button></li>
+      <li class="content-item section-entry"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>3</span><span>_Hexadecimal Code</span></span></button></li>
+      <li class="content-item section-entry"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>4</span><span>_Ideographic<br>Description Symbols</span></span></button></li>
+      <li class="content-item section-entry"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>5</span><span>_ Drafts</span></span></button></li>
     </ul>
+    <section class="about-page" id="about-page" aria-label="About" aria-hidden="true" inert>
+      <div class="about-body"></div>
+    </section>
     <div class="corner-frame">
       <div class="page-viewport">
       <article class="page-content" aria-live="polite" aria-atomic="true">
-        <div class="section-number" aria-hidden="true">1</div>
+        <div class="section-number" data-number="1" aria-hidden="true">1</div>
         <div class="page-body"></div>
         <footer><span id="page-number">01 / 05</span></footer>
       </article>
@@ -196,7 +233,9 @@
     function renderPage(index, slide = 0) {
       currentPage = Math.max(0, Math.min(titles.length - 1, index));
       currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
-      document.querySelector('.page-content .section-number').textContent = currentPage + 1;
+      const number = document.querySelector('.page-content .section-number');
+      number.textContent = currentPage + 1;
+      number.dataset.number = currentPage + 1;
       document.querySelector('.page-body').textContent = sections[currentPage].slides[currentSlide];
       document.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
       document.getElementById('page-number').textContent = `${String(currentPage + 1).padStart(2, '0')} / 05`;
@@ -254,6 +293,7 @@
       }
     }
     function navigate(direction) {
+      if (aboutOpen) return;
       if (direction === 'left' || direction === 'right') {
         showPage(currentPage, direction, currentSlide + (direction === 'left' ? -1 : 1));
       } else {
@@ -275,11 +315,29 @@
         navigate(direction);
       }
     });
+    let aboutOpen = false;
+    const main = document.querySelector('.content-page');
+    const about = document.querySelector('.about-page');
+    const viewToggle = document.querySelector('.view-toggle');
     const frame = document.querySelector('.corner-frame');
+    function toggleAbout() {
+      if (turning) return;
+      aboutOpen = !aboutOpen;
+      main.classList.toggle('is-about', aboutOpen);
+      main.setAttribute('aria-label', aboutOpen ? 'About' : 'Content');
+      viewToggle.querySelector('.item-label').textContent = aboutOpen ? 'Content' : 'About';
+      viewToggle.setAttribute('aria-expanded', String(aboutOpen));
+      about.setAttribute('aria-hidden', String(!aboutOpen));
+      about.inert = !aboutOpen;
+      frame.inert = aboutOpen;
+      frame.setAttribute('aria-hidden', String(aboutOpen));
+      updateLayout();
+    }
+    viewToggle.addEventListener('click', toggleAbout);
     const directory = document.querySelector('.circles');
     function updateLayout() {
       const frameBounds = frame.getBoundingClientRect();
-      frame.style.setProperty('--section-number-size', `${frameBounds.height * 0.8}px`);
+      frame.style.setProperty('--section-number-size', `${frameBounds.height * 0.96}px`);
       // Visibility preserves layout so hidden entries can still be measured.
       const overlaps = [...directory.querySelectorAll('.directory-button')].some(button => {
         const bounds = button.getBoundingClientRect();
@@ -287,7 +345,7 @@
           && bounds.bottom >= frameBounds.top && bounds.top <= frameBounds.bottom;
       });
       directory.classList.toggle('is-obscured', overlaps);
-      directory.inert = overlaps;
+      directory.querySelectorAll('.section-entry').forEach(entry => { entry.inert = overlaps || aboutOpen; });
     }
     const layoutObserver = new ResizeObserver(updateLayout);
     layoutObserver.observe(document.querySelector('.content-page'));
