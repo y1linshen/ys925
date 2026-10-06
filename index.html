@@ -453,10 +453,10 @@
     .page-content { overflow: hidden; }
     .page-sheet { backface-visibility: hidden; }
     .ids-description-list { height: 100%; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-justified,
-    .page-sheet[data-section="3"][data-slide="9"] .ids-justified { line-height: .6; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div,
-    .page-sheet[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .6em; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-justified,
+    .page-sheet[data-section="3"][data-slide="10"] .ids-justified { line-height: .6; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-flow > div,
+    .page-sheet[data-section="3"][data-slide="10"] .ids-flow > div { min-height: .6em; }
 
     .directory-button .item-label, .about-body { font-weight: 400; }
     .hex-poster-image:focus, .hex-poster-image:focus-visible,
@@ -464,18 +464,18 @@
     .derivation-glyph { justify-content: center; padding-left: 0; }
     .derivation-row:nth-child(2) .derivation-glyph { justify-content: flex-start; }
     .ids-description-row > span:nth-child(2) { transform: translateX(-20px); }
-    .page-sheet[data-section="3"][data-slide="5"] .ids-flow { font-size: 10.8cqw; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-justified,
-    .page-sheet[data-section="3"][data-slide="9"] .ids-justified { line-height: .72; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div,
-    .page-sheet[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .72em; }
+    .page-sheet[data-section="3"][data-slide="6"] .ids-flow { font-size: 10.8cqw; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-justified,
+    .page-sheet[data-section="3"][data-slide="10"] .ids-justified { line-height: .72; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-flow > div,
+    .page-sheet[data-section="3"][data-slide="10"] .ids-flow > div { min-height: .72em; }
 
     .directory-button .item-label { font-weight: 400; }
     .about-body { font-weight: 500; }
     .ids-description-row > span:nth-child(2) { font-size: 1.25em; }
-    .page-sheet[data-section="3"][data-slide="5"] .ids-flow { font-size: 13.5cqw; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-justified { line-height: .792; }
-    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div { min-height: .792em; }
+    .page-sheet[data-section="3"][data-slide="6"] .ids-flow { font-size: 13.5cqw; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-justified { line-height: .792; }
+    .page-sheet[data-section="3"][data-slide="8"] .ids-flow > div { min-height: .792em; }
     .draft-alternate .alternate-glyph > .draft-code { position: static; display: block; writing-mode: horizontal-tb; transform: none; font-size: 3cqw; line-height: 1; }
     .page-sheet[data-section="1"][data-slide="4"] .self-derivation { transform: none; }
     .page-sheet[data-section="1"][data-slide="4"] .derivation-glyph { justify-content: flex-start; padding-left: 0; }
@@ -504,6 +504,10 @@
     .content-page[data-view="unicode"] .view-toggle .item-label { font-weight: 400; font-style: normal; }
 
     .outgoing-sheet { pointer-events: none; }
+
+    .page-sheet[data-section="3"][data-slide="1"] .ids-intro { justify-content: flex-start; font-size: 6.5cqw !important; }
+
+    .page-sheet[data-section="3"][data-slide="7"] .ids-specimen-label { font-size: 16.2cqw; }
   </style>
 </head>
 <body>
@@ -523,7 +527,8 @@
     <section class="unicode-panel" hidden aria-label="About Unicode"></section>
 
   </main>
-<template id="ids-page-0"><div class="ids-intro"><p>Based on the sixteen ideographic description characters shown on the next page, any CJK character can be described as a structural combination of ideographic description characters and existing Unicode CJK components.</p><p>Extending the same logic, Latin characters can also be constructed through ideographic description characters combined with existing Unicode Latin forms.</p></div></template>
+<template id="ids-page-0"><div class="ids-intro"><p>Based on the sixteen ideographic description characters shown on the following pages, any CJK character can be described as a structural combination of ideographic description characters and existing Unicode CJK components.</p></div></template>
+<template id="ids-intro-continuation"><div class="ids-intro"><p>Extending the same logic, Latin characters can also be constructed through ideographic description characters combined with existing Unicode Latin forms.</p></div></template>
 
 
 
@@ -728,7 +733,7 @@
     }
     sections[2].slides.push(...hexPosterImages.map(() => ''));
     sections[4].slides = Array(4).fill('');
-    sections[3].slides = Array(10).fill('');
+    sections[3].slides = Array(11).fill('');
     sections[0].slides.push('');
     sections[1].slides.push(...Array(8).fill(''));
     function buildNestedCharacter(character, level, depth = 0) {
@@ -816,7 +821,8 @@
       const showsIntro = currentPage === 0 && currentSlide === 0;
       const showsDraft = currentPage === 4;
       const showsIDS = currentPage === 3;
-      const specimen = showsIDS && currentSlide > 2 ? currentSlide - 1 : currentSlide === 2 ? 1 : currentSlide;
+      const originalSlide = showsIDS && currentSlide > 0 ? currentSlide - 1 : currentSlide;
+      const specimen = showsIDS && originalSlide > 2 ? originalSlide - 1 : originalSlide === 2 ? 1 : originalSlide;
       frame.dataset.specimen = specimen;
       const activeSheet = frame.querySelector('.page-sheet');
       activeSheet.dataset.section = currentPage;
@@ -852,7 +858,7 @@
           if (scribble) scribble.setAttribute('aria-label', `Experimental glyph ${character}`);
         });
       }
-      else if (showsIDS) pageBody.append(document.getElementById(currentSlide === 2 ? 'ids-description-continuation' : `ids-page-${specimen}`).content.cloneNode(true));
+      else if (showsIDS) pageBody.append(document.getElementById(currentSlide === 1 ? 'ids-intro-continuation' : originalSlide === 2 ? 'ids-description-continuation' : `ids-page-${specimen}`).content.cloneNode(true));
       else if (showsHexPoster) {
         const image = document.createElement('img');
         image.className = 'hex-poster-image';
@@ -907,7 +913,7 @@
         pageBody.append(paragraph);
       }
       else pageBody.textContent = sections[currentPage].slides[currentSlide];
-      if (showsIDS && currentSlide === 5) {
+      if (showsIDS && originalSlide === 5) {
         pageBody.querySelector('.ids-flow').style.fontSize = `${frame.clientWidth * 0.135}px`;
       }
       frame.querySelector('.more-info').hidden = !showsIntro;
@@ -1141,7 +1147,7 @@
         if (frame.dataset.layoutKey === layoutKey) return;
         frame.dataset.layoutKey = layoutKey;
         frame.style.setProperty('--section-number-size', `${frameWidth * 850 / 650 * 0.96}px`);
-        const alphabet = frame.querySelector('.page-sheet:not(.outgoing-sheet)[data-section="3"][data-slide="5"] .ids-flow');
+        const alphabet = frame.querySelector('.page-sheet:not(.outgoing-sheet)[data-section="3"][data-slide="6"] .ids-flow');
         if (alphabet) alphabet.style.fontSize = `${frameWidth * 0.135}px`;
         alignDraftCodes(frame);
         alignDerivationArrows(frame);
