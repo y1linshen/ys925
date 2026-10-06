@@ -398,13 +398,13 @@
     .poster-lightbox img { width: 100%; height: 100%; object-fit: contain; }
     .poster-lightbox button { position: absolute; right: 12px; top: 8px; border: 0; background: white; font-size: 28px; cursor: pointer; }
     .hex-poster-image { cursor: zoom-in; }
-    .corner-frame[data-section="1"][data-slide="0"] .page-content,
-    .corner-frame[data-section="1"][data-slide="1"] .page-content { padding: 3cqw 1.5cqw; }
+    .page-sheet[data-section="1"][data-slide="0"] .page-content,
+    .page-sheet[data-section="1"][data-slide="1"] .page-content { padding: 3cqw 1.5cqw; }
     .self-alphanumeric:not(.self-font-comparison) .character-code { font-size: 2.592cqw; }
     .self-font-comparison .character-glyph { font-size: 7.5cqw; }
-    .corner-frame[data-section="1"][data-slide="2"] .page-content,
-    .corner-frame[data-section="1"][data-slide="3"] .page-content,
-    .corner-frame[data-section="1"][data-slide="4"] .page-content { padding: 1.5cqw; }
+    .page-sheet[data-section="1"][data-slide="2"] .page-content,
+    .page-sheet[data-section="1"][data-slide="3"] .page-content,
+    .page-sheet[data-section="1"][data-slide="4"] .page-content { padding: 1.5cqw; }
     .process-item { font-size: 26.4cqw; }
     .process-digits { font-size: 12cqw; }
     .self-derivation { width: 100%; }
@@ -414,7 +414,7 @@
     .derivation-label { font-size: 3.84cqw; }
     .message-poster { font-size: 20.9cqw; }
     .message-poster-i { font-size: 19.8cqw; }
-    .corner-frame[data-section="2"][data-slide="1"] .page-content { padding: 2cqw; }
+    .page-sheet[data-section="2"][data-slide="1"] .page-content { padding: 2cqw; }
     .hex-demonstration { margin: 0; height: 100%; font-size: 13.2cqw; gap: 3cqw; }
     .hex-equation { grid-template-columns: 7ch 1ch 1fr; gap: .4cqw; }
     .hex-swatch { width: 14.4cqw; height: 14.4cqw; }
@@ -427,12 +427,12 @@
     .ids-justified > .ids-specimen-label { font-size: 27cqw; white-space: nowrap; }
 
     .project-caption { top: auto; bottom: calc(100% + 49px); }
-    .corner-frame[data-section="1"][data-slide="4"] .self-derivation,
+    .page-sheet[data-section="1"][data-slide="4"] .self-derivation,
     .corner-frame[data-section="4"] .draft-chart { transform: translateX(30px); }
     .poster-lightbox { inset: 0; margin: auto; width: 100vw; height: 100dvh; padding: 0; background: transparent; overflow: hidden; cursor: zoom-out; }
     .poster-lightbox img { display: block; object-fit: contain; }
-    .corner-frame[data-section="3"][data-slide="0"] .page-content { padding: 1.5cqw; }
-    .corner-frame[data-section="3"][data-slide="0"] .ids-intro { justify-content: flex-start; gap: 1em; }
+    .page-sheet[data-section="3"][data-slide="0"] .page-content { padding: 1.5cqw; }
+    .page-sheet[data-section="3"][data-slide="0"] .ids-intro { justify-content: flex-start; gap: 1em; }
     .ids-description-list { grid-template-rows: repeat(6, 1fr); }
     .ids-description { font-size: 4.2cqw; }
     .ids-description > p { margin-left: 0; }
@@ -440,10 +440,10 @@
     .ids-examples-lined .ids-example { width: 66.116%; }
     .ids-examples-lined .ids-example:nth-child(odd)::after { left: -25.625%; width: 302.5%; }
     .ids-justified > .ids-specimen-label { font-size: 20.25cqw; transform: none; }
-    .corner-frame[data-section="3"][data-specimen="6"] .ids-justified,
-    .corner-frame[data-section="3"][data-specimen="8"] .ids-justified { justify-content: flex-start; gap: 0; font-size: 13.5cqw; line-height: .5; }
-    .corner-frame[data-section="3"][data-specimen="6"] .ids-flow > div,
-    .corner-frame[data-section="3"][data-specimen="8"] .ids-flow > div { min-height: .5em; text-align: left; text-align-last: left; }
+    .page-sheet[data-section="3"][data-specimen="6"] .ids-justified,
+    .page-sheet[data-section="3"][data-specimen="8"] .ids-justified { justify-content: flex-start; gap: 0; font-size: 13.5cqw; line-height: .5; }
+    .page-sheet[data-section="3"][data-specimen="6"] .ids-flow > div,
+    .page-sheet[data-section="3"][data-specimen="8"] .ids-flow > div { min-height: .5em; text-align: left; text-align-last: left; }
 
     .unicode-alphabet { aspect-ratio: 650 / 1020; margin-left: 0; }
     .unicode-alphabet .character-cell { justify-content: flex-start; padding-left: 0; }
@@ -453,10 +453,10 @@
     .page-content { overflow: hidden; }
     .page-sheet { backface-visibility: hidden; }
     .ids-description-list { height: 100%; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-justified,
-    .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .6; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
-    .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .6em; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-justified,
+    .page-sheet[data-section="3"][data-slide="9"] .ids-justified { line-height: .6; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div,
+    .page-sheet[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .6em; }
 
     .directory-button .item-label, .about-body { font-weight: 400; }
     .hex-poster-image:focus, .hex-poster-image:focus-visible,
@@ -464,29 +464,29 @@
     .derivation-glyph { justify-content: center; padding-left: 0; }
     .derivation-row:nth-child(2) .derivation-glyph { justify-content: flex-start; }
     .ids-description-row > span:nth-child(2) { transform: translateX(-20px); }
-    .corner-frame[data-section="3"][data-slide="5"] .ids-flow { font-size: 10.8cqw; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-justified,
-    .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .72; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
-    .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .72em; }
+    .page-sheet[data-section="3"][data-slide="5"] .ids-flow { font-size: 10.8cqw; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-justified,
+    .page-sheet[data-section="3"][data-slide="9"] .ids-justified { line-height: .72; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div,
+    .page-sheet[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .72em; }
 
     .directory-button .item-label { font-weight: 400; }
     .about-body { font-weight: 500; }
     .ids-description-row > span:nth-child(2) { font-size: 1.25em; }
-    .corner-frame[data-section="3"][data-slide="5"] .ids-flow { font-size: 13.5cqw; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-justified { line-height: .792; }
-    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div { min-height: .792em; }
+    .page-sheet[data-section="3"][data-slide="5"] .ids-flow { font-size: 13.5cqw; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-justified { line-height: .792; }
+    .page-sheet[data-section="3"][data-slide="7"] .ids-flow > div { min-height: .792em; }
     .draft-alternate .alternate-glyph > .draft-code { position: static; display: block; writing-mode: horizontal-tb; transform: none; font-size: 3cqw; line-height: 1; }
-    .corner-frame[data-section="1"][data-slide="4"] .self-derivation { transform: none; }
-    .corner-frame[data-section="1"][data-slide="4"] .derivation-glyph { justify-content: flex-start; padding-left: 0; }
+    .page-sheet[data-section="1"][data-slide="4"] .self-derivation { transform: none; }
+    .page-sheet[data-section="1"][data-slide="4"] .derivation-glyph { justify-content: flex-start; padding-left: 0; }
 
     body { overflow-x: clip; }
     .page-sheet { width: 100%; transform: translate3d(0,0,0); }
-    .corner-frame[data-section="2"][data-slide="0"] .unicode-intro,
-    .corner-frame[data-section="3"][data-slide="0"] .ids-intro { font-size: 6.5cqw !important; }
+    .page-sheet[data-section="2"][data-slide="0"] .unicode-intro,
+    .page-sheet[data-section="3"][data-slide="0"] .ids-intro { font-size: 6.5cqw !important; }
     .hex-equation { grid-template-columns: minmax(0, 1fr) 1ch 14.4cqw; column-gap: 2cqw; width: 100%; }
     .hex-demonstration { font-size: 12.5cqw; }
-    .corner-frame[data-section="1"][data-slide="4"] .derivation-row:not(:nth-child(2)) .derivation-glyph { width: 27cqw; justify-content: center; }
+    .page-sheet[data-section="1"][data-slide="4"] .derivation-row:not(:nth-child(2)) .derivation-glyph { width: 27cqw; justify-content: center; }
     .ids-description-row > span:nth-child(2) { font-size: 1.5625em; }
     .draft-row:last-child .draft-alternate > .draft-code,
     .draft-row:last-child .draft-alternate .alternate-glyph > .draft-code { font-size: 3cqw; }
@@ -499,9 +499,11 @@
     .project-grid .hex-demonstration { margin-top: 0; }
 
     .view-toggle .item-label { font-weight: 500; }
-    .unicode-toggle .item-label { font-weight: 400; font-style: italic; }
+    .unicode-toggle .item-label { font-weight: 400; font-style: normal; }
     .content-page[data-view="website"] .view-toggle .item-label,
     .content-page[data-view="unicode"] .view-toggle .item-label { font-weight: 400; font-style: normal; }
+
+    .outgoing-sheet { pointer-events: none; }
   </style>
 </head>
 <body>
@@ -705,7 +707,7 @@
     const titles = ['1 Unicode', '2 _Self', '3 _Hexadecimal Code', '4 _Ideographic Description Symbols', '5 _ Drafts'];
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
-    const hexPosterImages = ["assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg", "assets/hex-posters/poster-1.jpg", "assets/hex-posters/poster-2.jpg"];
+    const hexPosterImages = ["assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg", "assets/hex-posters/through-a-hex-6.jpg", "assets/hex-posters/through-a-hex-5.jpg", "assets/hex-posters/through-a-hex-8.jpg", "assets/hex-posters/through-a-hex-7.jpg"];
     const hexPosterPreviews = hexPosterImages.map(source => source.replace(/\.jpg$/, '.webp'));
     const posterPreviewCache = new Map();
     function preparePoster(index) {
@@ -816,6 +818,10 @@
       const showsIDS = currentPage === 3;
       const specimen = showsIDS && currentSlide > 2 ? currentSlide - 1 : currentSlide === 2 ? 1 : currentSlide;
       frame.dataset.specimen = specimen;
+      const activeSheet = frame.querySelector('.page-sheet');
+      activeSheet.dataset.section = currentPage;
+      activeSheet.dataset.slide = currentSlide;
+      activeSheet.dataset.specimen = specimen;
       frame.querySelector('.page-content').classList.toggle('is-ids-page', showsIDS);
       const showsHexIntro = currentPage === 2 && currentSlide === 0;
       const showsHexDemonstration = currentPage === 2 && currentSlide === 1;
@@ -901,6 +907,9 @@
         pageBody.append(paragraph);
       }
       else pageBody.textContent = sections[currentPage].slides[currentSlide];
+      if (showsIDS && currentSlide === 5) {
+        pageBody.querySelector('.ids-flow').style.fontSize = `${frame.clientWidth * 0.135}px`;
+      }
       frame.querySelector('.more-info').hidden = !showsIntro;
       frame.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
       frame.querySelector('.page-content').scrollTop = 0;
@@ -934,14 +943,20 @@
       frame.addEventListener('focusin', () => activeFrame = frame);
       let wheelTotal = 0;
       let lastWheel = 0;
+      let gestureTurned = false;
       frame.addEventListener('wheel', event => {
         if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
         event.preventDefault();
-        if (frame.dataset.turning === 'true') { wheelTotal = 0; return; }
-        if (performance.now() - lastWheel > 200) wheelTotal = 0;
-        lastWheel = performance.now();
-        wheelTotal += event.deltaY;
-        if (Math.abs(wheelTotal) > 60) { turnFrame(frame, Math.sign(wheelTotal)); wheelTotal = 0; }
+        const now = performance.now();
+        if (now - lastWheel > 240) { wheelTotal = 0; gestureTurned = false; }
+        lastWheel = now;
+        if (gestureTurned || frame.dataset.turning === 'true') { wheelTotal = 0; return; }
+        wheelTotal += event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? frame.clientHeight : 1);
+        if (Math.abs(wheelTotal) > 60) {
+          gestureTurned = true;
+          turnFrame(frame, Math.sign(wheelTotal));
+          wheelTotal = 0;
+        }
       }, {passive: false});
       let touchStart;
       frame.addEventListener('touchstart', event => touchStart = event.touches[0].clientY, {passive:true});
@@ -981,11 +996,28 @@
       const count = sections[section].slides.length;
       const next = (slide + step + count) % count;
       if (next === slide) return;
-      const page = frame.querySelector('.page-sheet');
-      const outgoing = page.cloneNode(true);
+      const outgoing = frame.querySelector('.page-sheet');
+      // Freeze the outgoing typography before rendering a different page.
+      const typography = outgoing.querySelectorAll('.ids-flow, .ids-flow > div, .ids-flow span, .ids-description, .ids-description-symbol, .unicode-intro, .ids-intro');
+      const measuredTypography = Array.from(typography, element => {
+        const style = getComputedStyle(element);
+        return { element, fontSize: style.fontSize, lineHeight: style.lineHeight, letterSpacing: style.letterSpacing };
+      });
+      measuredTypography.forEach(({element, fontSize, lineHeight, letterSpacing}) => {
+        element.style.fontSize = fontSize;
+        element.style.lineHeight = lineHeight;
+        element.style.letterSpacing = letterSpacing;
+      });
+      const page = outgoing.cloneNode(true);
+      page.classList.remove('outgoing-sheet');
+      page.inert = false;
+      page.removeAttribute('aria-hidden');
+      page.style.transform = `translate3d(0,${step * 100}%,0)`;
+      outgoing.before(page);
       outgoing.inert = true;
       outgoing.setAttribute('aria-hidden', 'true');
-      page.parentElement.append(outgoing);
+      outgoing.classList.add('outgoing-sheet');
+
       frame.dataset.turning = 'true';
       renderPage(frame, section, next);
       const animations = [];
@@ -1000,8 +1032,10 @@
           await Promise.all(animations.map(animation => animation.finished));
         }
       } finally {
-        outgoing.remove();
+        page.style.transform = 'translate3d(0,0,0)';
+        outgoing.style.visibility = 'hidden';
         animations.forEach(animation => animation.cancel());
+        outgoing.remove();
         page.style.willChange = '';
         frame.dataset.turning = 'false';
       }
@@ -1107,6 +1141,8 @@
         if (frame.dataset.layoutKey === layoutKey) return;
         frame.dataset.layoutKey = layoutKey;
         frame.style.setProperty('--section-number-size', `${frameWidth * 850 / 650 * 0.96}px`);
+        const alphabet = frame.querySelector('.page-sheet:not(.outgoing-sheet)[data-section="3"][data-slide="5"] .ids-flow');
+        if (alphabet) alphabet.style.fontSize = `${frameWidth * 0.135}px`;
         alignDraftCodes(frame);
         alignDerivationArrows(frame);
         layoutNestedCharacters(frame);
