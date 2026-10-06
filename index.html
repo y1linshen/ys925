@@ -6,6 +6,20 @@
   <title>Content</title>
   <link rel="stylesheet" href="fonts/abc-rom.css">
   <style>
+    @font-face {
+      font-family: "A-side Inside I";
+      src: url("fonts/A-sideInsideI.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "A-side Inside II";
+      src: url("fonts/A-sideInsideII.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
     * { box-sizing: border-box; }
 
     body {
@@ -33,7 +47,7 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      transform: scale(1.2);
+      transform:;
       transform-origin: top left;
       z-index: 3;
     }
@@ -187,18 +201,111 @@
     .more-info[hidden] { display: none; }
     .more-info a { color: #000; }
     .corner-frame { container-type: inline-size; }
-    .page-content.is-character-table { padding: 32px 10px 10px; overflow: hidden; background: white; }
+    .page-content.is-character-table { padding: 32px 10px 10px; overflow: hidden; background: transparent; }
     .is-character-table .page-body { height: 100%; min-height: 0; }
-    .character-chart { height: 100%; display: flex; flex-direction: column; font-weight: 400; background: white; }
+    .character-chart { height: 100%; display: flex; flex-direction: column; font-weight: 400; background: transparent; }
     .character-table { width: 100%; height: 100%; table-layout: fixed; border-collapse: collapse; }
     .character-table tr { height: calc(100% / 19); }
     .character-table td { border: 0; padding: 0; vertical-align: middle; }
     .character-cell { display: flex; align-items: center; justify-content: center; gap: 1cqw; padding: 0.35cqw; white-space: nowrap; }
-    .character-glyph { font-size: 5cqw; line-height: 1; text-align: center; flex: 0 0 1.2em; }
+    .character-glyph { font-size: 6cqw; line-height: 1; text-align: center; flex: 0 0 1.2em; }
     .character-code { font-size: 1.8cqw; line-height: 1; color: #999; font-variant-numeric: tabular-nums; flex: 0 0 4ch; }
-    .frame-pagination { position: absolute; left: 10px; top: 10px; margin: 0; font-size: 18px; line-height: 1; display: flex; gap: 0.25em; }
-    .page-number-window { position: relative; display: inline-block; width: 2ch; height: 1em; overflow: hidden; }
-    .page-number-window span { position: absolute; inset: 0; font-variant-numeric: tabular-nums; }
+    .self-alphanumeric:not(.self-font-comparison) .character-code { font-size: 2.16cqw; }
+    .self-alphanumeric .character-table tr { height: calc(100% / 13); }
+    .self-font-comparison .character-glyph { font-family: "A-side Inside I"; font-size: 6.25cqw; font-weight: 400; order: 2; color: #999; }
+    .self-font-comparison .character-code { font-size: 4.05cqw; flex-basis: 1.2ch; order: 1; color: #000; }
+    .page-content.is-self-process { padding: 32px 10px 10px; overflow: hidden; }
+    .is-self-process .page-body { height: 100%; min-height: 0; }
+    .self-process { display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); row-gap: 4cqw; height: 100%; font-weight: 400; color: #000; }
+    .process-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 6cqw minmax(0, 1fr); align-items: center; }
+    .self-process:not(.self-process-xyz) .process-row:not(:last-child)::after { content: ""; position: absolute; left: calc((100% - 6cqw) / 4); bottom: -2cqw; transform: translate(-50%, 50%); width: 3.6cqw; height: 2.7cqw; background: #999; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+    .self-process:not(.self-process-xyz) .process-row:nth-child(3)::after { display: none; }
+    .self-process:not(.self-process-xyz) .process-row:nth-child(4)::before { content: ""; position: absolute; top: calc(-2cqw - 1px); left: 50%; transform: translateX(-50%); width: 75cqw; height: 2px; background: #000; }
+    .process-item { display: flex; align-items: center; justify-content: center; font-size: 22cqw; line-height: 1; }
+    .process-inside-i { font-family: "A-side Inside I"; }
+    .process-inside-ii { font-family: "A-side Inside II"; }
+    .process-digits { display: grid; grid-template-columns: repeat(2, max-content); grid-template-rows: repeat(2, max-content); gap: 0; align-items: center; justify-items: center; justify-self: center; width: max-content; height: auto; font-size: 10cqw; line-height: 1.2; }
+    .process-arrow { display: block; width: 2.7cqw; height: 3.6cqw; background: #999; clip-path: polygon(0 0, 100% 50%, 0 100%); justify-self: center; }
+    .self-process-xyz { grid-template-rows: repeat(3, minmax(0, 1fr)); row-gap: 0; }
+    .self-process-xyz .process-row::before { display: none; }
+    .self-derivation { width: calc(100% - 40px); margin-inline: auto; display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); height: 100%; color: #000; font-weight: 400; }
+    .derivation-row { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; }
+    .derivation-glyph { display: flex; align-items: center; justify-content: flex-start; padding-left: 20px; font-size: 18cqw; line-height: 1; }
+    .derivation-row:nth-child(-n+2) .derivation-glyph { font-size: 13.5cqw; }
+    .derivation-row:nth-child(n+3) .derivation-glyph { font-size: 22.5cqw; }
+    .derivation-label { text-align: left; font-size: 3.2cqw; line-height: 1.15; }
+    .derivation-row:not(:last-child)::after { content: ""; position: absolute; left: var(--derivation-arrow-x, 8cqw); bottom: 0; transform: translate(-50%, 50%); width: 3.6cqw; height: 2.7cqw; background: #999; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+    .self-nested { height: 100%; display: flex; align-items: center; justify-content: center; font-family: "ABC ROM", sans-serif; font-weight: 400; }
+    .nested-box { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); border: var(--nested-stroke) solid #000; padding: var(--nested-space); gap: var(--nested-space); min-width: 0; min-height: 0; }
+    .nested-root { width: 90cqw; height: 104.4cqw; }
+    .nested-digit { display: block; min-width: 0; min-height: 0; }
+    .nested-digit svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .nested-digit text { font-family: "A-side Inside I"; font-size: 100px; font-weight: 400; fill: #000; }
+    .self-poster { height: 100%; color: #000; font-family: "ABC ROM", sans-serif; font-weight: 400; }
+    .message-poster { display: grid; grid-template-rows: repeat(5, 0.9em); align-content: start; font-size: 19cqw; line-height: 0.9; }
+    .poster-line { display: flex; align-items: center; white-space: nowrap; }
+    .poster-inside-i { font-family: "A-side Inside I"; }
+    .poster-inside-ii { font-family: "A-side Inside II"; }
+    .message-poster-i { font-size: 18cqw; }
+    @font-face { font-family: "IDS"; src: url("fonts/IDS.otf") format("opentype"); font-weight: 400; font-style: normal; }
+    .ids-description { height: 100%; display: flex; flex-direction: column; font-family: "ABC ROM", sans-serif; font-size: 3cqw; font-weight: 400; line-height: 1.1; }
+    .ids-description p { margin: 0 0 1em; }
+    .ids-description-title { font-size: inherit; }
+    .ids-description-list { flex: 1; display: grid; grid-template-rows: repeat(12, 1fr); }
+    .ids-description-row { display: grid; grid-template-columns: 20% 30% 50%; gap: 0; align-items: center; }
+    .ids-description-symbol { font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif; font-size: inherit; }
+    .ids-description-row > span:nth-child(2) { text-align: center; justify-self: center; transform: translateX(-70px); }
+    .ids-description-row > span:nth-child(3) { padding-left: 0; }
+    .ids-description > p { margin-left: 50%; font-size: inherit; }
+    .ids-half { overflow: hidden !important; }
+    @font-face { font-family: "Hanyi Qihei"; src: url("fonts/Hanyi-Qihei-Book.otf") format("opentype"); font-weight: 400; }
+    .ids-examples { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 2cqw 4cqw; }
+    .ids-examples-lined .ids-example { width: 80%; justify-self: center; padding-bottom: 1cqw; }
+    .ids-examples-lined .ids-example:nth-last-child(2)::after { display: none; }
+    .ids-examples-lined { column-gap: 0; position: relative; }
+    .ids-examples-lined .ids-example:nth-child(odd) { position: relative; }
+    .ids-examples-lined .ids-example:nth-child(odd)::after { content: ""; position: absolute; left: -12.5%; width: 250%; height: 1px; background: #ddd; bottom: 0; }
+    .ids-flow { height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; }
+    .draft-chart { height: 100%; display: grid; grid-template-rows: repeat(5, 1fr); font-family: "ABC ROM", "Hanyi Qihei", sans-serif; font-weight: 400; }
+    .draft-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+    .draft-original { font-size: 16cqw; }
+    .draft-result { display: flex; flex-direction: column; align-items: flex-start; font-size: 12cqw; line-height: 1; }
+    .draft-code { font-size: 3cqw; line-height: 1; white-space: nowrap; }
+    .draft-badge { width: 14cqw; height: 14cqw; display: flex; align-items: center; justify-content: center; border: 1px solid #000; border-radius: 50%; font-size: 3cqw; }
+    .draft-badge.filled { background: #000; color: #fff; }
+    .draft-badge.double { outline: 1px solid #000; outline-offset: 3px; }
+    .draft-badge.square { border-radius: 1.5cqw; }
+    .draft-scribble { width: 14cqw; height: 10cqw; fill: none; stroke: #000; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .draft-alternate { display: flex; align-items: flex-end; position: relative; padding-left: 2cqw; }
+    .draft-alternate .draft-code { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 2cqw; position: absolute; left: 0; bottom: var(--code-bottom, 0px); line-height: 1; }
+    .draft-alternate .alternate-glyph { font-size: 16cqw; line-height: 1; }
+    .ids-example { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 1cqw; align-items: center; font-family: "ABC ROM", "Hanyi Qihei", sans-serif; font-weight: 400; font-size: 6cqw; line-height: 1; }
+    .ids-components { display: flex; justify-content: space-between; align-items: center; min-width: 0; }
+    .ids-example span { white-space: nowrap; }
+    .ids-operator { width: 1em; height: 1em; fill: none; stroke: black; stroke-width: 3; stroke-dasharray: 8 6; }
+    .ids-flow { font-family: "IDS"; font-weight: 400; font-size: 9cqw; line-height: 1; letter-spacing: normal; text-align: left; }
+    .ids-justified { position: relative; display: block; font-size: 9cqw; line-height: 1; padding: 0; }
+    .ids-justified > div { text-align: justify; text-align-last: justify; }
+    .ids-justified > .ids-letter-row { display: flex; justify-content: space-between; }
+    .ids-justified > .ids-specimen-label { position: absolute; top: 66.666%; left: 0; text-align: left; text-align-last: left; font-size: 9cqw; }
+    .ids-flow > div { min-height: 1em; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .ids-specimen { display: block; width: 100%; height: 100%; overflow: visible; }
+    .page-content.is-ids-page { padding: 32px 10px 10px; overflow: hidden; }
+    .is-ids-page .page-body { height: 100%; min-height: 0; }
+    .ids-intro { font-family: "ABC ROM", sans-serif; font-weight: 400; font-size: 36px; line-height: 1.2; }
+    .ids-intro h2 { font-size: inherit; font-weight: 400; margin: 0 0 1em; }
+    .ids-intro p { margin: 0 0 1em; }
+    .ids-intro img { display: block; width: 100%; height: auto; }
+    .design-credit { position: fixed; left: 32px; bottom: 24px; z-index: 4; margin: 0; font-family: "ABC ROM", sans-serif; font-size: 14px; font-weight: 400; }
+    .hex-demonstration { height: calc(100% - 10px); margin-top: 10px; display: flex; flex-direction: column; justify-content: flex-start; gap: 4cqw; font-family: "ABC ROM", sans-serif; font-weight: 400; font-size: 11cqw; line-height: 1; }
+    .hex-equation { display: grid; grid-template-columns: 7ch 1ch 1fr; gap: 2cqw; align-items: center; text-align: left; }
+    .hex-poster-image { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .hex-caption { margin: 0 0 0.25cqw; font-size: 3cqw; line-height: 1.2; color: #999; }
+    .hex-arrow { width: 3.6cqw; height: 2.7cqw; flex-shrink: 0; background: #999; clip-path: polygon(0 0, 100% 0, 50% 100%); margin: 1cqw 0 1cqw; position: relative; left: 0.335em; transform: translateX(-50%); }
+    .hex-swatch { display: block; width: 12cqw; height: 12cqw; background: #000041; }
+    .frame-pagination { font-family: "ABC ROM", sans-serif; font-weight: 400; font-variant-numeric: normal; position: absolute; left: 10px; top: 10px; margin: 0; font-size: 18px; line-height: 1; display: flex; gap: 0; }
+    .page-number-window { position: relative; display: inline-block; width: 1ch; height: 1em; overflow: hidden; color: #999; }
+    .page-number-window span { position: absolute; inset: 0; }
     .page-body { position: relative; flex-shrink: 0; }
     .corner-frame {
       width: min(650px, calc(100vw - 120px), calc((100svh - 120px) * 650 / 850));
@@ -226,45 +333,108 @@
     @media (max-height: 359px) {
       .corner-frame { width: min(650px, calc(100vw - 120px), 183px); }
     }
+
+    [hidden] { display: none !important; }
+    .project-grid { position: absolute; top: 0; left: 0; width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; padding: 270px 32px 60px; }
+    .project-grid .corner-frame, .unicode-panel .corner-frame { position: relative; left: auto; top: auto; transform: none; width: 100%; max-width: 650px; }
+    .project-grid .corner-frame:focus-visible { outline: 1px solid #999; outline-offset: 8px; }
+    .unicode-panel { position: absolute; top: 0; left: 0; width: 100%; padding: 210px 60px 60px; }
+    .unicode-panel .corner-frame { margin: 0 auto; }
+    .about-page { position: absolute; top: 0; left: 0; width: 100%; min-height: 100svh; transform: none; visibility: visible; transition: none; }
+    .about-body { padding-top: 210px; }
+    .view-toggle { margin-bottom: 0; }
+    .unicode-toggle { display: block; margin-bottom: 28.8px; }
+    .content-page[data-view="website"] .section-entry, .content-page[data-view="unicode"] .section-entry { display: none; }
+    .corner-frame .unicode-intro, .corner-frame .more-info, .corner-frame .ids-intro { font-size: 5.54cqw; }
+    .frame-pagination { font-size: clamp(12px, 2.77cqw, 18px); }
+    .corner-frame .page-content { padding-top: 32px; }
+    @media (max-width: 1100px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; } }
+    @media (max-width: 650px) { .project-grid { grid-template-columns: 1fr; padding-top: 290px; } .circles { transform: scale(.85); } .about-body { margin-left: 0; width: 100%; padding: 230px 32px 32px; font-size: 8vw; } }
+
+    .circles { display: flex; flex-direction: row; align-items: center; gap: 28px; top: 24px; left: 24px; transform: none; }
+    .view-toggle, .unicode-toggle { margin: 0; }
+    .directory-button .item-label { font-size: 24px; }
+    .directory-button { transition: color 150ms ease; }
+    .directory-button:hover, .directory-button:focus-visible { color: #999; }
+    .unicode-result { position: absolute; top: 72px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; line-height: 1; }
+    .unicode-result-glyph { font-size: 48px; font-weight: 400; }
+    .unicode-result-code { margin-top: 6px; font-size: 12px; font-weight: 400; color: #999; }
+    .project-grid { inset: 154px 0 42px; width: 100%; padding: 0 24px; display: grid; grid-template-columns: repeat(var(--frame-columns, 4), var(--frame-width, 20vw)); gap: 44px; place-content: center; }
+    .project-grid .corner-frame { width: var(--frame-width); max-width: none; }
+    .corner-frame .triangle-top { bottom: calc(100% + 8px); }
+    .corner-frame .triangle-bottom { top: calc(100% + 8px); }
+    .corner-frame .frame-triangle { width: 18px; height: 15px; }
+    .corner-frame .frame-triangle:hover { background: #999; }
+    .corner-frame .page-content { padding-top: 10px; }
+    .section-number[data-number="1"] { transform: translateY(calc(100% / 30)); }
+    .unicode-panel { padding-top: 110px; }
+    .about-body { padding-top: 110px; }
+    @media (max-width: 650px) {
+      .circles { transform: none; }
+      .project-grid { grid-template-columns: repeat(var(--frame-columns), var(--frame-width)); padding: 0 24px; }
+      .about-body { padding: 110px 24px 24px; }
+    }
+
+    .about-body { padding-top: 24px; }
+    .unicode-panel { padding: 0; }
+    .unicode-body .unicode-intro { font-family: inherit; font-size: inherit; font-weight: inherit; line-height: inherit; margin-bottom: .5em; }
+    .unicode-body a { color: #000; overflow-wrap: anywhere; }
+    .unicode-alphabet { width: min(650px, 100%); height: auto; aspect-ratio: 650 / 850; container-type: inline-size; margin: .5em 0; }
+    .unicode-alphabet .character-chart { width: 100%; height: 100%; }
+    @media (max-width: 650px) { .about-body { padding-top: 84px; } }
+    .project-grid { inset: 150px 0; }
+    .project-grid { gap: 64px; }
+    .project-grid.single-column { bottom: auto; padding-bottom: 50px; }
   </style>
 </head>
 <body>
   <main class="content-page" aria-label="Content">
     <ul class="circles">
-      <li class="content-item"><button class="directory-button view-toggle" aria-expanded="false" aria-controls="about-page"><span class="item-label">About</span></button></li>
-      <li class="content-item section-entry"><button class="directory-button" data-page="0"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>1</span><span>Unicode</span></span></button></li>
-      <li class="content-item section-entry"><button class="directory-button" data-page="1"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>2</span><span>_Self</span></span></button></li>
-      <li class="content-item section-entry"><button class="directory-button" data-page="2"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>3</span><span>_Hexadecimal Code</span></span></button></li>
-      <li class="content-item section-entry"><button class="directory-button" data-page="3"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>4</span><span>_Ideographic<br>Description Symbols</span></span></button></li>
-      <li class="content-item section-entry"><button class="directory-button" data-page="4"><span class="circle" aria-hidden="true"></span><span class="item-label numbered-label"><span>5</span><span>_ Drafts</span></span></button></li>
+      <li class="content-item"><button class="directory-button view-toggle" aria-expanded="false" aria-controls="about-page"><span class="item-label">Website</span></button></li>
+      <li class="content-item"><button class="directory-button unicode-toggle"><span class="item-label">Unicode</span></button></li>
     </ul>
     <section class="about-page" id="about-page" aria-label="About" aria-hidden="true" inert>
       <div class="about-body">
         <p>This website documents Yilin Shen’s ongoing exploration of Unicode.</p>
-        <p>Begun in October 2024, the project examines the principles and algorithms underlying Unicode, while exploring how the medium itself shapes meaning. Both strands approach Unicode as a working language.</p>
+        <p>Begun in October 2024, the project examines the principles and algorithms underlying Unicode, while exploring the visual potential of the medium itself. Both strands approach Unicode as a working language.</p>
       </div>
     </section>
-    <div class="corner-frame">
-      <div class="page-viewport">
-      <div class="page-sheet">
-      <div class="section-number" data-number="1" aria-hidden="true">1</div>
-      <article class="page-content" aria-live="polite" aria-atomic="true">
-        <div class="page-body"></div>
-        <footer class="more-info" hidden>More Info:<br><a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Unicode</a></footer>
-      </article>
-      </div>
-      </div>
-      <footer class="frame-pagination" aria-label="Section 1 of 5"><span class="page-number-window"><span id="page-number">01</span></span><span class="page-total">/05</span></footer>
-      <span class="frame-corner top-left"></span>
-      <span class="frame-corner top-right"></span>
-      <span class="frame-corner bottom-left"></span>
-      <span class="frame-corner bottom-right"></span>
-      <button class="frame-triangle triangle-top" data-step="-1" aria-label="Previous section"></button>
-      <button class="frame-triangle triangle-bottom" data-step="1" aria-label="Next section"></button>
-      <button class="frame-triangle triangle-left" data-step="-1" aria-label="Previous content"></button>
-      <button class="frame-triangle triangle-right" data-step="1" aria-label="Next content"></button>
-    </div>
+    <output class="unicode-result" aria-live="polite" aria-label="Unicode character from four page numbers"><span class="unicode-result-glyph"></span><span class="unicode-result-code"></span></output>
+    <section class="project-grid" aria-label="Four projects"></section>
+    <section class="unicode-panel" hidden aria-label="About Unicode"></section>
+
   </main>
+<template id="ids-page-0"><div class="ids-intro"><p>Based on the sixteen ideographic description characters shown on the next page, any CJK character can be described as a structural combination of ideographic description characters and existing Unicode CJK components.<br><br>Extending the same logic, Latin characters can also be constructed through ideographic description characters combined with existing Unicode Latin forms.</p></div></template>
+
+
+
+
+<template id="ids-page-1"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><p>These are visibly displayed graphic characters, not invisible composition controls.</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
+<template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span></div><div class="ids-letter-row"><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span></div><div class="ids-letter-row"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span></div><div class="ids-letter-row"><span>n</span><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span><span>w</span><span>x</span><span>y</span><span>z</span></div><div class="ids-letter-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></div><div class="ids-letter-row"><span>!</span><span>@</span><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
+<template id="ids-page-5"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Word</div></div></template>
+<template id="ids-page-6"><div class="ids-flow ids-justified"><div>Ideographic</div><div>Description</div><div>Sequences</div><div>Typography-ish</div><div>Method</div></div></template>
+<template id="ids-page-7"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Sentence</div></div></template>
+<template id="ids-page-8"><div class="ids-flow ids-justified"><div>The</div><div>&#32;quick</div><div>&#32;&#32;brown</div><div>&#32;&#32;&#32;fox</div><div>&#32;&#32;&#32;&#32;jumps</div><div>&#32;&#32;&#32;&#32;&#32;over</div><div>&#32;&#32;&#32;&#32;&#32;&#32;the</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;lazy</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dog.</div></div></template>
+
+
+<template id="ids-page-2"><div class="ids-examples ids-examples-lined"><div class="ids-example"><span>K</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M50 0V100"/></svg><div class="ids-components"><span>I</span><span>&lt;</span></div></div><div class="ids-example"><span>相</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M50 0V100"/></svg><div class="ids-components"><span>木</span><span>目</span></div></div><div class="ids-example"><span>H</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M33 0V100M67 0V100"/></svg><div class="ids-components"><span>I</span><span>-</span><span>I</span></div></div><div class="ids-example"><span>衍</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M33 0V100M67 0V100"/></svg><div class="ids-components"><span>彳</span><span>氵</span><span>亍</span></div></div><div class="ids-example"><span>B</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 50H100"/></svg><div class="ids-components"><span>D</span><span>D</span></div></div><div class="ids-example"><span>杏</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 50H100"/></svg><div class="ids-components"><span>木</span><span>口</span></div></div><div class="ids-example"><span>I</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 33H100M0 67H100"/></svg><div class="ids-components"><span>-</span><span>I</span><span>-</span></div></div><div class="ids-example"><span>京</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 33H100M0 67H100"/></svg><div class="ids-components"><span>亠</span><span>口</span><span>小</span></div></div><div class="ids-example"><span>©</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 22H78V78H22Z"/></svg><div class="ids-components"><span>O</span><span>C</span></div></div><div class="ids-example"><span>回</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 22H78V78H22Z"/></svg><div class="ids-components"><span>口</span><span>口</span></div></div><div class="ids-example"><span>Ǔ</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 0V72H78V0"/></svg><div class="ids-components"><span>U</span><span>∨</span></div></div><div class="ids-example"><span>凶</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 0V72H78V0"/></svg><div class="ids-components"><span>凵</span><span>㐅</span></div></div><div class="ids-example"><span>A</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 24H72V100"/></svg><div class="ids-components"><span>Λ</span><span>-</span></div></div><div class="ids-example"><span>凰</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 24H72V100"/></svg><div class="ids-components"><span>几</span><span>皇</span></div></div><div class="ids-example"><span>E</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 100V22H100"/></svg><div class="ids-components"><span>[</span><span>-</span></div></div><div class="ids-example"><span>凶</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 100V22H100"/></svg><div class="ids-components"><span>匚</span><span>㐅</span></div></div></div></template>
+<template id="ids-page-3"><div class="ids-examples ids-examples-lined"><div class="ids-example"><span>Q</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 22H78V100"/></svg><div class="ids-components"><span>O</span><span>\</span></div></div><div class="ids-example"><span>病</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 22H78V100"/></svg><div class="ids-components"><span>疒</span><span>丙</span></div></div><div class="ids-example"><span>Ł</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 0V78H100"/></svg><div class="ids-components"><span>L</span><span>/</span></div></div><div class="ids-example"><span>超</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M22 0V78H100"/></svg><div class="ids-components"><span>走</span><span>召</span></div></div><div class="ids-example"><span>ɗ</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 22H78V100"/></svg><div class="ids-components"><span>¬</span><span>o</span></div></div><div class="ids-example"><span>戒</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M0 22H78V100"/></svg><div class="ids-components"><span>戈</span><span>廾</span></div></div><div class="ids-example"><span>÷</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M40 0H0V60H60V0H40M40 40H100V100H40Z"/></svg><div class="ids-components"><span>:</span><span>-</span></div></div><div class="ids-example"><span>巫</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M40 0H0V60H60V0H40M40 40H100V100H40Z"/></svg><div class="ids-components"><span>工</span><span>从</span></div></div><div class="ids-example"><span>Ð</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M40 0H0V60H60V0H40M40 40H100V100H40Z"/></svg><div class="ids-components"><span>-</span><span>D</span></div></div><div class="ids-example"><span>叉</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M40 0H0V60H60V0H40M40 40H100V100H40Z"/></svg><div class="ids-components"><span>又</span><span>丶</span></div></div><div class="ids-example"><span>ħ</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M50 0V100"/></svg><div class="ids-components"><span>-</span><span>h</span></div></div><div class="ids-example"><span>冰</span><svg viewBox="0 0 100 100" class="ids-operator" aria-hidden="true"><rect x="2" y="2" width="96" height="96"/><path d="M50 0V100"/></svg><div class="ids-components"><span>水</span><span>丶</span></div></div></div></template>
+<template id="draft-page-0"><div class="draft-chart"><div class="draft-row"><span class="draft-original">A</span><div class="draft-result"><span class="draft-badge ">U+0041</span></div></div><div class="draft-row"><span class="draft-original">B</span><div class="draft-result"><span class="draft-badge filled">U+0042</span></div></div><div class="draft-row"><span class="draft-original">C</span><div class="draft-result"><span class="draft-code">(U+0043)</span></div></div><div class="draft-row"><span class="draft-original">D</span><div class="draft-result"><span class="draft-badge double">U+0044</span></div></div><div class="draft-row"><span class="draft-original">E</span><div class="draft-result"><span class="draft-badge filled square">U+0045</span></div></div></div></template>
+<template id="draft-page-1"><div class="draft-chart"><div class="draft-row"><span class="draft-original">A</span><div class="draft-result"><span>U</span><span class="draft-code">+0041</span></div></div><div class="draft-row"><span class="draft-original">B</span><div class="draft-result"><span>U</span><span class="draft-code">+0042</span></div></div><div class="draft-row"><span class="draft-original">C</span><div class="draft-result"><span>U</span><span class="draft-code">+0043</span></div></div><div class="draft-row"><span class="draft-original">D</span><div class="draft-result"><span>U</span><span class="draft-code">+0044</span></div></div><div class="draft-row"><span class="draft-original">E</span><div class="draft-result"><span>U</span><span class="draft-code">+0045</span></div></div></div></template>
+<template id="draft-page-2"><div class="draft-chart"><div class="draft-row"><span class="draft-original">A</span><div class="draft-result"><svg class="draft-scribble" viewBox="0 0 100 100" aria-label="Experimental glyph A"><path d="M10 45C15 12 65 20 75 30S60 65 35 50S35 0 50 5S55 70 30 60S30 30 55 20S90 5 85 45"/></svg><span class="draft-code">U+0041</span></div></div><div class="draft-row"><span class="draft-original">B</span><div class="draft-result"><svg class="draft-scribble" viewBox="0 0 100 100" aria-label="Experimental glyph B"><path d="M20 65C0 30 20 10 60 30S80 80 40 65M30 60L30 0L70 20L50 65L15 25"/></svg><span class="draft-code">U+0042</span></div></div><div class="draft-row"><span class="draft-original">C</span><div class="draft-result"><svg class="draft-scribble" viewBox="0 0 100 100" aria-label="Experimental glyph C"><path d="M10 20C-5-10 50 15 40 40S90 85 55 90S0 70 45 60S90 5 70 0S65 55 45 60"/></svg><span class="draft-code">U+0043</span></div></div><div class="draft-row"><span class="draft-original">D</span><div class="draft-result"><svg class="draft-scribble" viewBox="0 0 100 100" aria-label="Experimental glyph D"><path d="M30 10C10 60 25 85 45 75S85 30 70 20S10 30 30 45S90 5 65 10M50 20C5 35 45 85 70 50"/></svg><span class="draft-code">U+0044</span></div></div><div class="draft-row"><span class="draft-original">E</span><div class="draft-result"><svg class="draft-scribble" viewBox="0 0 100 100" aria-label="Experimental glyph E"><path d="M25 10L20 80M15 65C0 85 5 30 30 30S35 95 50 75S80 20 60 20S45 90 35 80M15 70L75 75"/></svg><span class="draft-code">U+0045</span></div></div></div></template>
+<template id="draft-page-3"><div class="draft-chart"><div class="draft-row"><span class="draft-original">A</span><div class="draft-result"><span class="draft-alternate"><span class="draft-code">U+0041</span><span class="alternate-glyph">B</span></span></div></div><div class="draft-row"><span class="draft-original">B</span><div class="draft-result"><span class="draft-alternate"><span class="draft-code">U+0042</span><span class="alternate-glyph">b</span></span></div></div><div class="draft-row"><span class="draft-original">C</span><div class="draft-result"><span class="draft-alternate"><span class="draft-code">U+0043</span><span class="alternate-glyph">$</span></span></div></div><div class="draft-row"><span class="draft-original">D</span><div class="draft-result"><span class="draft-alternate"><span class="draft-code">U+0044</span><span class="alternate-glyph">低</span></span></div></div><div class="draft-row"><span class="draft-original">E</span><div class="draft-result"><span class="draft-alternate"><span class="draft-code">U+0045</span><span class="alternate-glyph"><span class="draft-code">U+007A</span></span></span></div></div></div></template>
+<template id="hex-demonstration">
+  <div class="hex-demonstration">
+    <div><p class="hex-caption">Unicode</p><div class="hex-equation"><span>U+0041</span><span>=</span><span>A</span></div></div>
+    <div><p class="hex-caption">Hex Color Code</p><div class="hex-equation"><span>#000041</span><span>=</span><span class="hex-swatch" role="img" aria-label="Color #000041"></span></div></div>
+    <span class="hex-arrow" aria-hidden="true"></span>
+    <div class="hex-equation"><span>A</span><span>=</span><span class="hex-swatch" role="img" aria-label="Color #000041"></span></div>
+  </div>
+</template>
+<template id="hex-intro">
+  <p class="unicode-intro">Hex color codes are a fundamental part of digital design, web development, and graphic creation. They provide a standardized way to represent colors using a six-character code based on <u>hexadecimal</u> encoding.</p>
+  <p class="unicode-intro" style="margin-top: 1.2em;">Unicode code points are also commonly written in <u>hexadecimal</u> notation.</p>
+</template>
 <template id="unicode-intro">
   <p class="unicode-intro">Unicode is a character encoding standard maintained by the Unicode Consortium designed to support the use of text in all of the world’s writing systems that can be digitized.</p>
 </template>
@@ -295,166 +465,470 @@
     </table>
   </div>
 </template>
+<template id="self-character-chart">
+  <div class="character-chart self-alphanumeric">
+    <table class="character-table" aria-label="Lowercase letters, uppercase letters, and digits with Unicode hexadecimal values">
+      <tbody>
+    <tr><td title="U+0061"><div class="character-cell"><span class="character-glyph">a</span><span class="character-code">0061</span></div></td><td title="U+0062"><div class="character-cell"><span class="character-glyph">b</span><span class="character-code">0062</span></div></td><td title="U+0063"><div class="character-cell"><span class="character-glyph">c</span><span class="character-code">0063</span></div></td><td title="U+0064"><div class="character-cell"><span class="character-glyph">d</span><span class="character-code">0064</span></div></td><td title="U+0065"><div class="character-cell"><span class="character-glyph">e</span><span class="character-code">0065</span></div></td></tr>
+    <tr><td title="U+0066"><div class="character-cell"><span class="character-glyph">f</span><span class="character-code">0066</span></div></td><td title="U+0067"><div class="character-cell"><span class="character-glyph">g</span><span class="character-code">0067</span></div></td><td title="U+0068"><div class="character-cell"><span class="character-glyph">h</span><span class="character-code">0068</span></div></td><td title="U+0069"><div class="character-cell"><span class="character-glyph">i</span><span class="character-code">0069</span></div></td><td title="U+006A"><div class="character-cell"><span class="character-glyph">j</span><span class="character-code">006A</span></div></td></tr>
+    <tr><td title="U+006B"><div class="character-cell"><span class="character-glyph">k</span><span class="character-code">006B</span></div></td><td title="U+006C"><div class="character-cell"><span class="character-glyph">l</span><span class="character-code">006C</span></div></td><td title="U+006D"><div class="character-cell"><span class="character-glyph">m</span><span class="character-code">006D</span></div></td><td title="U+006E"><div class="character-cell"><span class="character-glyph">n</span><span class="character-code">006E</span></div></td><td title="U+006F"><div class="character-cell"><span class="character-glyph">o</span><span class="character-code">006F</span></div></td></tr>
+    <tr><td title="U+0070"><div class="character-cell"><span class="character-glyph">p</span><span class="character-code">0070</span></div></td><td title="U+0071"><div class="character-cell"><span class="character-glyph">q</span><span class="character-code">0071</span></div></td><td title="U+0072"><div class="character-cell"><span class="character-glyph">r</span><span class="character-code">0072</span></div></td><td title="U+0073"><div class="character-cell"><span class="character-glyph">s</span><span class="character-code">0073</span></div></td><td title="U+0074"><div class="character-cell"><span class="character-glyph">t</span><span class="character-code">0074</span></div></td></tr>
+    <tr><td title="U+0075"><div class="character-cell"><span class="character-glyph">u</span><span class="character-code">0075</span></div></td><td title="U+0076"><div class="character-cell"><span class="character-glyph">v</span><span class="character-code">0076</span></div></td><td title="U+0077"><div class="character-cell"><span class="character-glyph">w</span><span class="character-code">0077</span></div></td><td title="U+0078"><div class="character-cell"><span class="character-glyph">x</span><span class="character-code">0078</span></div></td><td title="U+0079"><div class="character-cell"><span class="character-glyph">y</span><span class="character-code">0079</span></div></td></tr>
+    <tr><td title="U+007A"><div class="character-cell"><span class="character-glyph">z</span><span class="character-code">007A</span></div></td><td title="U+0041"><div class="character-cell"><span class="character-glyph">A</span><span class="character-code">0041</span></div></td><td title="U+0042"><div class="character-cell"><span class="character-glyph">B</span><span class="character-code">0042</span></div></td><td title="U+0043"><div class="character-cell"><span class="character-glyph">C</span><span class="character-code">0043</span></div></td><td title="U+0044"><div class="character-cell"><span class="character-glyph">D</span><span class="character-code">0044</span></div></td></tr>
+    <tr><td title="U+0045"><div class="character-cell"><span class="character-glyph">E</span><span class="character-code">0045</span></div></td><td title="U+0046"><div class="character-cell"><span class="character-glyph">F</span><span class="character-code">0046</span></div></td><td title="U+0047"><div class="character-cell"><span class="character-glyph">G</span><span class="character-code">0047</span></div></td><td title="U+0048"><div class="character-cell"><span class="character-glyph">H</span><span class="character-code">0048</span></div></td><td title="U+0049"><div class="character-cell"><span class="character-glyph">I</span><span class="character-code">0049</span></div></td></tr>
+    <tr><td title="U+004A"><div class="character-cell"><span class="character-glyph">J</span><span class="character-code">004A</span></div></td><td title="U+004B"><div class="character-cell"><span class="character-glyph">K</span><span class="character-code">004B</span></div></td><td title="U+004C"><div class="character-cell"><span class="character-glyph">L</span><span class="character-code">004C</span></div></td><td title="U+004D"><div class="character-cell"><span class="character-glyph">M</span><span class="character-code">004D</span></div></td><td title="U+004E"><div class="character-cell"><span class="character-glyph">N</span><span class="character-code">004E</span></div></td></tr>
+    <tr><td title="U+004F"><div class="character-cell"><span class="character-glyph">O</span><span class="character-code">004F</span></div></td><td title="U+0050"><div class="character-cell"><span class="character-glyph">P</span><span class="character-code">0050</span></div></td><td title="U+0051"><div class="character-cell"><span class="character-glyph">Q</span><span class="character-code">0051</span></div></td><td title="U+0052"><div class="character-cell"><span class="character-glyph">R</span><span class="character-code">0052</span></div></td><td title="U+0053"><div class="character-cell"><span class="character-glyph">S</span><span class="character-code">0053</span></div></td></tr>
+    <tr><td title="U+0054"><div class="character-cell"><span class="character-glyph">T</span><span class="character-code">0054</span></div></td><td title="U+0055"><div class="character-cell"><span class="character-glyph">U</span><span class="character-code">0055</span></div></td><td title="U+0056"><div class="character-cell"><span class="character-glyph">V</span><span class="character-code">0056</span></div></td><td title="U+0057"><div class="character-cell"><span class="character-glyph">W</span><span class="character-code">0057</span></div></td><td title="U+0058"><div class="character-cell"><span class="character-glyph">X</span><span class="character-code">0058</span></div></td></tr>
+    <tr><td title="U+0059"><div class="character-cell"><span class="character-glyph">Y</span><span class="character-code">0059</span></div></td><td title="U+005A"><div class="character-cell"><span class="character-glyph">Z</span><span class="character-code">005A</span></div></td><td title="U+0030"><div class="character-cell"><span class="character-glyph">0</span><span class="character-code">0030</span></div></td><td title="U+0031"><div class="character-cell"><span class="character-glyph">1</span><span class="character-code">0031</span></div></td><td title="U+0032"><div class="character-cell"><span class="character-glyph">2</span><span class="character-code">0032</span></div></td></tr>
+    <tr><td title="U+0033"><div class="character-cell"><span class="character-glyph">3</span><span class="character-code">0033</span></div></td><td title="U+0034"><div class="character-cell"><span class="character-glyph">4</span><span class="character-code">0034</span></div></td><td title="U+0035"><div class="character-cell"><span class="character-glyph">5</span><span class="character-code">0035</span></div></td><td title="U+0036"><div class="character-cell"><span class="character-glyph">6</span><span class="character-code">0036</span></div></td><td title="U+0037"><div class="character-cell"><span class="character-glyph">7</span><span class="character-code">0037</span></div></td></tr>
+    <tr><td title="U+0038"><div class="character-cell"><span class="character-glyph">8</span><span class="character-code">0038</span></div></td><td title="U+0039"><div class="character-cell"><span class="character-glyph">9</span><span class="character-code">0039</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<template id="self-font-comparison">
+  <div class="character-chart self-alphanumeric self-font-comparison">
+    <table class="character-table" aria-label="Lowercase letters, uppercase letters, and digits in InsideI and ROM">
+      <tbody>
+    <tr><td title="U+0061"><div class="character-cell"><span class="character-glyph">a</span><span class="character-code">a</span></div></td><td title="U+0062"><div class="character-cell"><span class="character-glyph">b</span><span class="character-code">b</span></div></td><td title="U+0063"><div class="character-cell"><span class="character-glyph">c</span><span class="character-code">c</span></div></td><td title="U+0064"><div class="character-cell"><span class="character-glyph">d</span><span class="character-code">d</span></div></td><td title="U+0065"><div class="character-cell"><span class="character-glyph">e</span><span class="character-code">e</span></div></td></tr>
+    <tr><td title="U+0066"><div class="character-cell"><span class="character-glyph">f</span><span class="character-code">f</span></div></td><td title="U+0067"><div class="character-cell"><span class="character-glyph">g</span><span class="character-code">g</span></div></td><td title="U+0068"><div class="character-cell"><span class="character-glyph">h</span><span class="character-code">h</span></div></td><td title="U+0069"><div class="character-cell"><span class="character-glyph">i</span><span class="character-code">i</span></div></td><td title="U+006A"><div class="character-cell"><span class="character-glyph">j</span><span class="character-code">j</span></div></td></tr>
+    <tr><td title="U+006B"><div class="character-cell"><span class="character-glyph">k</span><span class="character-code">k</span></div></td><td title="U+006C"><div class="character-cell"><span class="character-glyph">l</span><span class="character-code">l</span></div></td><td title="U+006D"><div class="character-cell"><span class="character-glyph">m</span><span class="character-code">m</span></div></td><td title="U+006E"><div class="character-cell"><span class="character-glyph">n</span><span class="character-code">n</span></div></td><td title="U+006F"><div class="character-cell"><span class="character-glyph">o</span><span class="character-code">o</span></div></td></tr>
+    <tr><td title="U+0070"><div class="character-cell"><span class="character-glyph">p</span><span class="character-code">p</span></div></td><td title="U+0071"><div class="character-cell"><span class="character-glyph">q</span><span class="character-code">q</span></div></td><td title="U+0072"><div class="character-cell"><span class="character-glyph">r</span><span class="character-code">r</span></div></td><td title="U+0073"><div class="character-cell"><span class="character-glyph">s</span><span class="character-code">s</span></div></td><td title="U+0074"><div class="character-cell"><span class="character-glyph">t</span><span class="character-code">t</span></div></td></tr>
+    <tr><td title="U+0075"><div class="character-cell"><span class="character-glyph">u</span><span class="character-code">u</span></div></td><td title="U+0076"><div class="character-cell"><span class="character-glyph">v</span><span class="character-code">v</span></div></td><td title="U+0077"><div class="character-cell"><span class="character-glyph">w</span><span class="character-code">w</span></div></td><td title="U+0078"><div class="character-cell"><span class="character-glyph">x</span><span class="character-code">x</span></div></td><td title="U+0079"><div class="character-cell"><span class="character-glyph">y</span><span class="character-code">y</span></div></td></tr>
+    <tr><td title="U+007A"><div class="character-cell"><span class="character-glyph">z</span><span class="character-code">z</span></div></td><td title="U+0041"><div class="character-cell"><span class="character-glyph">A</span><span class="character-code">A</span></div></td><td title="U+0042"><div class="character-cell"><span class="character-glyph">B</span><span class="character-code">B</span></div></td><td title="U+0043"><div class="character-cell"><span class="character-glyph">C</span><span class="character-code">C</span></div></td><td title="U+0044"><div class="character-cell"><span class="character-glyph">D</span><span class="character-code">D</span></div></td></tr>
+    <tr><td title="U+0045"><div class="character-cell"><span class="character-glyph">E</span><span class="character-code">E</span></div></td><td title="U+0046"><div class="character-cell"><span class="character-glyph">F</span><span class="character-code">F</span></div></td><td title="U+0047"><div class="character-cell"><span class="character-glyph">G</span><span class="character-code">G</span></div></td><td title="U+0048"><div class="character-cell"><span class="character-glyph">H</span><span class="character-code">H</span></div></td><td title="U+0049"><div class="character-cell"><span class="character-glyph">I</span><span class="character-code">I</span></div></td></tr>
+    <tr><td title="U+004A"><div class="character-cell"><span class="character-glyph">J</span><span class="character-code">J</span></div></td><td title="U+004B"><div class="character-cell"><span class="character-glyph">K</span><span class="character-code">K</span></div></td><td title="U+004C"><div class="character-cell"><span class="character-glyph">L</span><span class="character-code">L</span></div></td><td title="U+004D"><div class="character-cell"><span class="character-glyph">M</span><span class="character-code">M</span></div></td><td title="U+004E"><div class="character-cell"><span class="character-glyph">N</span><span class="character-code">N</span></div></td></tr>
+    <tr><td title="U+004F"><div class="character-cell"><span class="character-glyph">O</span><span class="character-code">O</span></div></td><td title="U+0050"><div class="character-cell"><span class="character-glyph">P</span><span class="character-code">P</span></div></td><td title="U+0051"><div class="character-cell"><span class="character-glyph">Q</span><span class="character-code">Q</span></div></td><td title="U+0052"><div class="character-cell"><span class="character-glyph">R</span><span class="character-code">R</span></div></td><td title="U+0053"><div class="character-cell"><span class="character-glyph">S</span><span class="character-code">S</span></div></td></tr>
+    <tr><td title="U+0054"><div class="character-cell"><span class="character-glyph">T</span><span class="character-code">T</span></div></td><td title="U+0055"><div class="character-cell"><span class="character-glyph">U</span><span class="character-code">U</span></div></td><td title="U+0056"><div class="character-cell"><span class="character-glyph">V</span><span class="character-code">V</span></div></td><td title="U+0057"><div class="character-cell"><span class="character-glyph">W</span><span class="character-code">W</span></div></td><td title="U+0058"><div class="character-cell"><span class="character-glyph">X</span><span class="character-code">X</span></div></td></tr>
+    <tr><td title="U+0059"><div class="character-cell"><span class="character-glyph">Y</span><span class="character-code">Y</span></div></td><td title="U+005A"><div class="character-cell"><span class="character-glyph">Z</span><span class="character-code">Z</span></div></td><td title="U+0030"><div class="character-cell"><span class="character-glyph">0</span><span class="character-code">0</span></div></td><td title="U+0031"><div class="character-cell"><span class="character-glyph">1</span><span class="character-code">1</span></div></td><td title="U+0032"><div class="character-cell"><span class="character-glyph">2</span><span class="character-code">2</span></div></td></tr>
+    <tr><td title="U+0033"><div class="character-cell"><span class="character-glyph">3</span><span class="character-code">3</span></div></td><td title="U+0034"><div class="character-cell"><span class="character-glyph">4</span><span class="character-code">4</span></div></td><td title="U+0035"><div class="character-cell"><span class="character-glyph">5</span><span class="character-code">5</span></div></td><td title="U+0036"><div class="character-cell"><span class="character-glyph">6</span><span class="character-code">6</span></div></td><td title="U+0037"><div class="character-cell"><span class="character-glyph">7</span><span class="character-code">7</span></div></td></tr>
+    <tr><td title="U+0038"><div class="character-cell"><span class="character-glyph">8</span><span class="character-code">8</span></div></td><td title="U+0039"><div class="character-cell"><span class="character-glyph">9</span><span class="character-code">9</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<template id="self-process">
+  <div class="self-process" aria-label="Successive ROM, InsideI, and InsideII character representations">
+    <div class="process-row">
+      <span class="process-item">A</span>
+      <span class="process-arrow" aria-hidden="true"></span>
+      <span class="process-item process-inside-i">A</span>
+    </div>
+    <div class="process-row">
+      <div class="process-digits"><span>0</span><span>0</span><span>4</span><span>1</span></div>
+      <span class="process-arrow" aria-hidden="true"></span>
+      <div class="process-digits process-inside-i"><span>0</span><span>0</span><span>4</span><span>1</span></div>
+    </div>
+    <div class="process-row">
+      <span class="process-item process-inside-i">A</span>
+      <span class="process-arrow" aria-hidden="true"></span>
+      <span class="process-item process-inside-ii">A</span>
+    </div>
+    <div class="process-row">
+      <span class="process-item">A</span>
+      <span class="process-arrow" aria-hidden="true"></span>
+      <span class="process-item process-inside-ii">A</span>
+    </div>
+  </div>
+</template>
+<template id="self-derivation">
+  <div class="self-derivation">
+    <div class="derivation-row"><span class="derivation-glyph"><span class="derivation-original">A</span></span><div class="derivation-label">Original Character</div></div>
+    <div class="derivation-row"><span class="derivation-glyph">0041</span><div class="derivation-label">Character Encoding</div></div>
+    <div class="derivation-row"><span class="derivation-glyph process-inside-i">A</span><div class="derivation-label">First-level<br>derived characters</div></div>
+    <div class="derivation-row"><span class="derivation-glyph process-inside-ii">A</span><div class="derivation-label">Second-level<br>derived characters</div></div>
+  </div>
+</template>
+<template id="self-xyz">
+  <div class="self-process self-process-xyz" aria-label="X, Y, and Z with second-level derived characters">
+    <div class="process-row"><span class="process-item">X</span><span class="process-arrow" aria-hidden="true"></span><span class="process-item process-inside-ii">X</span></div>
+    <div class="process-row"><span class="process-item">Y</span><span class="process-arrow" aria-hidden="true"></span><span class="process-item process-inside-ii">Y</span></div>
+    <div class="process-row"><span class="process-item">Z</span><span class="process-arrow" aria-hidden="true"></span><span class="process-item process-inside-ii">Z</span></div>
+  </div>
+</template>
+<template id="self-message-ii">
+  <div class="self-poster message-poster" aria-label="The Medium is the Message.">
+    <div class="poster-line"><span class="poster-inside-ii">T</span><span>he</span></div>
+    <div class="poster-line"><span>Medi</span><span class="poster-inside-ii">u</span><span>m</span></div>
+    <div class="poster-line"><span class="poster-inside-ii">i</span><span>s</span></div>
+    <div class="poster-line">the</div>
+    <div class="poster-line"><span>Message</span><span class="poster-inside-ii">.</span></div>
+  </div>
+</template>
+<template id="self-message-i">
+  <div class="self-poster message-poster message-poster-i" aria-label="The Medium is the Message.">
+    <div class="poster-line"><span>T</span><span class="poster-inside-i">he</span></div>
+    <div class="poster-line"><span class="poster-inside-i">Medi</span><span>u</span><span class="poster-inside-i">m</span></div>
+    <div class="poster-line"><span>i</span><span class="poster-inside-i">s</span></div>
+    <div class="poster-line poster-inside-i">the</div>
+    <div class="poster-line"><span class="poster-inside-i">Message</span><span>.</span></div>
+  </div>
+</template>
+
+<template id="project-frame">    <div class="corner-frame">
+      <div class="page-viewport">
+      <div class="page-sheet">
+      <div class="section-number" data-number="1" aria-hidden="true">1</div>
+      <article class="page-content" aria-live="polite" aria-atomic="true">
+        <div class="page-body"></div>
+        <footer class="more-info" hidden>More Info:<br><a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Unicode</a></footer>
+      </article>
+      </div>
+      </div>
+      <span class="frame-corner top-left"></span>
+      <span class="frame-corner top-right"></span>
+      <span class="frame-corner bottom-left"></span>
+      <span class="frame-corner bottom-right"></span>
+      <button class="frame-triangle triangle-top" data-step="-1" aria-label="Previous page"></button>
+      <button class="frame-triangle triangle-bottom" data-step="1" aria-label="Next page"></button>
+    </div></template>
 <script>
     const titles = ['1 Unicode', '2 _Self', '3 _Hexadecimal Code', '4 _Ideographic Description Symbols', '5 _ Drafts'];
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
-    let currentPage = 0;
-    let currentSlide = 0;
-    function renderPage(index, slide = 0) {
-      currentPage = Math.max(0, Math.min(titles.length - 1, index));
-      currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
-      const number = document.querySelector('.section-number');
-      number.textContent = currentPage + 1;
-      number.dataset.number = currentPage + 1;
-      const pageBody = document.querySelector('.page-body');
+    const hexPosterImages = ["assets/hex-posters/poster-1.jpg", "assets/hex-posters/poster-2.jpg", "assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg"];
+    sections[2].slides.push(...hexPosterImages.map(() => ''));
+    sections[4].slides = Array(4).fill('');
+    sections[3].slides = Array(9).fill('');
+    sections[0].slides.push('');
+    sections[1].slides.push(...Array(8).fill(''));
+    function buildNestedCharacter(character, level, depth = 0) {
+      if (level === 1) {
+        const digit = document.createElement('span');
+        digit.className = 'nested-digit';
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = character;
+        svg.append(text);
+        digit.append(svg);
+        return digit;
+      }
+      const box = document.createElement('div');
+      box.className = 'nested-box';
+      const code = character.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+      for (const digit of code) box.append(buildNestedCharacter(digit, level - 1, depth + 1));
+      return box;
+    }
+    function layoutNestedCharacters(frame) {
+      const wrapper = frame.querySelector('.self-nested');
+      if (!wrapper) return;
+      const root = wrapper.querySelector('.nested-root');
+      const level = Number(root.dataset.level);
+      const context = document.createElement('canvas').getContext('2d');
+      context.font = '400 100px "A-side Inside I"';
+      const measure = context.measureText('0');
+      const glyphWidth = measure.actualBoundingBoxLeft + measure.actualBoundingBoxRight;
+      const glyphHeight = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
+      if (!glyphWidth || !glyphHeight) return;
+      const units = 2 ** (level - 1);
+      const frameWidth = frame.getBoundingClientRect().width;
+      let space = frameWidth * 0.014 / (2 ** (level - 3));
+      const stroke = 6 - level;
+      let width = Math.min(frameWidth * 0.9, wrapper.clientWidth);
+      // Each two-by-two box adds two borders and three identical gaps.
+      const leafWidth = (width - (units - 1) * (3 * space + 2 * stroke)) / units;
+      let height = units * leafWidth * glyphHeight / glyphWidth + (units - 1) * (3 * space + 2 * stroke);
+      const scale = Math.min(1, wrapper.clientHeight * 0.96 / height);
+      width *= scale;
+      height *= scale;
+      space *= scale;
+      height = (width - (units - 1) * (3 * space + 2 * stroke)) * glyphHeight / glyphWidth + (units - 1) * (3 * space + 2 * stroke);
+      root.style.width = `${width}px`;
+      root.style.height = `${height}px`;
+      root.style.setProperty('--nested-space', `${space}px`);
+      root.style.setProperty('--nested-stroke', `${stroke}px`);
+      wrapper.querySelectorAll('.nested-digit svg').forEach(svg => {
+        const metrics = context.measureText(svg.textContent);
+        svg.setAttribute('viewBox', `${-metrics.actualBoundingBoxLeft} ${-metrics.actualBoundingBoxAscent} ${metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight} ${metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent}`);
+      });
+    }
+    function alignDraftCodes(frame) {
+      const canvas = document.createElement('canvas').getContext('2d');
+      frame.querySelectorAll('.draft-alternate').forEach(item => {
+        const glyph = item.querySelector('.alternate-glyph');
+        const style = getComputedStyle(glyph);
+        canvas.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        const metrics = canvas.measureText(glyph.textContent);
+        const height = glyph.getBoundingClientRect().height;
+        const ascent = metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent;
+        const descent = metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent;
+        const baseline = (height - ascent - descent) / 2 + ascent;
+        item.style.setProperty('--code-bottom', `${height - baseline - metrics.actualBoundingBoxDescent}px`);
+      });
+    }
+    function alignDerivationArrows(frame) {
+      const chart = frame.querySelector('.self-derivation');
+      const original = frame.querySelector('.derivation-original');
+      if (!chart || !original) return;
+      const bounds = original.getBoundingClientRect();
+      chart.style.setProperty('--derivation-arrow-x', `${bounds.left + bounds.width / 2 - chart.getBoundingClientRect().left}px`);
+    }
+    function renderPage(frame, index, slide = 0) {
+      const currentPage = Math.max(0, Math.min(titles.length - 1, index));
+      const currentSlide = Math.max(0, Math.min(sections[currentPage].slides.length - 1, slide));
+      const number = frame.querySelector('.section-number');
+      number.textContent = currentSlide.toString(16).toUpperCase();
+      number.dataset.number = currentSlide;
+      const pageBody = frame.querySelector('.page-body');
       const showsIntro = currentPage === 0 && currentSlide === 0;
+      const showsDraft = currentPage === 4;
+      const showsIDS = currentPage === 3;
+      frame.querySelector('.page-content').classList.toggle('is-ids-page', showsIDS);
+      const showsHexIntro = currentPage === 2 && currentSlide === 0;
+      const showsHexDemonstration = currentPage === 2 && currentSlide === 1;
+      const showsHexPoster = currentPage === 2 && currentSlide >= 2;
       const showsCharacterTable = currentPage === 0 && currentSlide === 1;
-      document.querySelector('.page-content').classList.toggle('is-character-table', showsCharacterTable);
+      const showsExplorer = currentPage === 0 && currentSlide === 2;
+      const showsSelfChart = currentPage === 1 && currentSlide === 0;
+      const showsSelfComparison = currentPage === 1 && currentSlide === 1;
+      const showsSelfProcess = currentPage === 1 && currentSlide === 2;
+      const showsSelfXYZ = currentPage === 1 && currentSlide === 3;
+      const showsSelfDerivation = currentPage === 1 && currentSlide === 4;
+      const showsSelfNested = currentPage === 1 && currentSlide >= 5 && currentSlide <= 7;
+      const showsSelfPoster = currentPage === 1 && currentSlide >= 8;
+      frame.querySelector('.page-content').classList.toggle('is-self-process', showsSelfProcess || showsSelfXYZ || showsSelfDerivation || showsSelfNested || showsSelfPoster || showsHexDemonstration || showsHexPoster || showsDraft || (showsIDS && currentSlide > 0));
+      frame.querySelector('.page-content').classList.toggle('is-character-table', showsCharacterTable || showsSelfChart || showsSelfComparison);
       pageBody.replaceChildren();
       if (showsIntro) pageBody.append(document.getElementById('unicode-intro').content.cloneNode(true));
+      else if (showsDraft) pageBody.append(document.getElementById(`draft-page-${currentSlide}`).content.cloneNode(true));
+      else if (showsIDS) pageBody.append(document.getElementById(`ids-page-${currentSlide}`).content.cloneNode(true));
+      else if (showsHexPoster) {
+        const image = document.createElement('img');
+        image.className = 'hex-poster-image';
+        image.src = hexPosterImages[currentSlide - 2];
+        image.alt = `Windows poster study ${currentSlide - 1}`;
+        pageBody.append(image);
+      }
+      else if (showsHexDemonstration) pageBody.append(document.getElementById('hex-demonstration').content.cloneNode(true));
+      else if (showsHexIntro) pageBody.append(document.getElementById('hex-intro').content.cloneNode(true));
       else if (showsCharacterTable) pageBody.append(document.getElementById('unicode-character-chart').content.cloneNode(true));
+      else if (showsSelfChart) pageBody.append(document.getElementById('self-character-chart').content.cloneNode(true));
+      else if (showsSelfComparison) pageBody.append(document.getElementById('self-font-comparison').content.cloneNode(true));
+      else if (showsSelfProcess) pageBody.append(document.getElementById('self-process').content.cloneNode(true));
+      else if (showsSelfXYZ) pageBody.append(document.getElementById('self-xyz').content.cloneNode(true));
+      else if (showsSelfDerivation) pageBody.append(document.getElementById('self-derivation').content.cloneNode(true));
+      else if (showsSelfNested) {
+        const level = currentSlide - 2;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'self-nested';
+        wrapper.setAttribute('aria-label', `Character A, level ${level} nesting`);
+        const root = buildNestedCharacter('A', level);
+        root.classList.add('nested-root');
+        root.setAttribute('aria-hidden', 'true');
+        root.dataset.level = level;
+        root.style.setProperty('--nested-stroke', `${6 - level}px`);
+        wrapper.append(root);
+        pageBody.append(wrapper);
+      }
+      else if (showsSelfPoster) {
+        const posters = ['self-message-ii', 'self-message-i'];
+        pageBody.append(document.getElementById(posters[currentSlide - 8]).content.cloneNode(true));
+      }
+      else if (showsExplorer) {
+        const paragraph = document.createElement('p');
+        paragraph.className = 'unicode-intro';
+        paragraph.append('Explore more:', document.createElement('br'));
+        const link = document.createElement('a');
+        link.href = 'https://unicode-explorer.com';
+        link.textContent = 'https://unicode-explorer.com';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.style.color = '#000';
+        paragraph.append(link);
+        pageBody.append(paragraph);
+      }
       else pageBody.textContent = sections[currentPage].slides[currentSlide];
-      document.querySelector('.more-info').hidden = !showsIntro;
-      document.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
-      document.getElementById('page-number').textContent = String(currentPage + 1).padStart(2, '0');
-      document.querySelector('.frame-pagination').setAttribute('aria-label', `Section ${currentPage + 1} of 5`);
-      document.querySelector('.page-content').scrollTop = 0;
-      document.querySelectorAll('[data-page]').forEach(button => {
-        if (Number(button.dataset.page) === currentPage) button.setAttribute('aria-current', 'page');
-        else button.removeAttribute('aria-current');
-      });
-      document.querySelectorAll('[data-step]').forEach(button => {
-        const horizontal = button.classList.contains('triangle-left') || button.classList.contains('triangle-right');
-        const position = horizontal ? currentSlide : currentPage;
-        const count = horizontal ? sections[currentPage].slides.length : sections.length;
-        button.disabled = Number(button.dataset.step) < 0 ? position === 0 : position === count - 1;
+      frame.querySelector('.more-info').hidden = !showsIntro;
+      frame.querySelector('.page-content').setAttribute('aria-label', `${titles[currentPage]}, content ${currentSlide + 1}`);
+      frame.querySelector('.page-content').scrollTop = 0;
+      alignDraftCodes(frame);
+      alignDerivationArrows(frame);
+      layoutNestedCharacters(frame);
+      frame.dataset.section = currentPage;
+      frame.dataset.slide = currentSlide;
+      updateUnicodeResult();
+      frame.querySelectorAll('[data-step]').forEach(button => {
+        button.disabled = false;
       });
     }
-    let turning = false;
-    async function showPage(index, direction, slide = 0) {
-      const next = Math.max(0, Math.min(titles.length - 1, index));
-      const nextSlide = Math.max(0, Math.min(sections[next].slides.length - 1, slide));
-      if (turning || (next === currentPage && nextSlide === currentSlide)) return;
-      direction ||= next > currentPage ? 'bottom' : 'top';
-      const page = document.querySelector('.page-sheet');
-      const pageNumber = document.getElementById('page-number');
-      const changesSection = next !== currentPage;
-      const previousNumber = pageNumber.textContent;
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        renderPage(next, nextSlide);
-        return;
-      }
-      const vectors = { right: [100, 0], left: [-100, 0], top: [0, -100], bottom: [0, 100] };
-      const [x, y] = vectors[direction];
+    const main = document.querySelector('.content-page');
+    const grid = document.querySelector('.project-grid');
+    const unicodePanel = document.querySelector('.unicode-panel');
+    const about = document.querySelector('.about-page');
+    const directory = document.querySelector('.circles');
+    const websiteToggle = document.querySelector('.view-toggle');
+    const unicodeToggle = document.querySelector('.unicode-toggle');
+    let view = 'content';
+    let viewTurning = false;
+    let activeFrame;
+    const frames = [];
+    function createFrame(section, parent) {
+      const frame = document.getElementById('project-frame').content.firstElementChild.cloneNode(true);
+      parent.append(frame);
+      frame.tabIndex = 0;
+      frame.setAttribute('aria-label', titles[section]);
+      frame.addEventListener('pointerenter', () => activeFrame = frame);
+      frame.addEventListener('focusin', () => activeFrame = frame);
+      let wheelTotal = 0;
+      let lastWheel = 0;
+      frame.addEventListener('wheel', event => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        if (frame.dataset.turning === 'true') { wheelTotal = 0; return; }
+        if (performance.now() - lastWheel > 200) wheelTotal = 0;
+        lastWheel = performance.now();
+        wheelTotal += event.deltaY;
+        if (Math.abs(wheelTotal) > 60) { turnFrame(frame, Math.sign(wheelTotal)); wheelTotal = 0; }
+      }, {passive: false});
+      let touchStart;
+      frame.addEventListener('touchstart', event => touchStart = event.touches[0].clientY, {passive:true});
+      frame.addEventListener('touchend', event => {
+        if (touchStart === undefined) return;
+        const distance = touchStart - event.changedTouches[0].clientY;
+        if (Math.abs(distance) > 40) turnFrame(frame, Math.sign(distance));
+        touchStart = undefined;
+      }, {passive:true});
+      frame.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => turnFrame(frame, Number(button.dataset.step))));
+      frames.push(frame);
+      renderPage(frame, section);
+      return frame;
+    }
+    for (let section = 1; section <= 4; section++) createFrame(section, grid);
+    const unicodeBody = document.createElement('div');
+    unicodeBody.className = 'about-body unicode-body';
+    unicodeBody.append(document.getElementById('unicode-intro').content.cloneNode(true));
+    const moreInfo = document.createElement('p');
+    moreInfo.innerHTML = 'More Info:<br><a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Unicode</a>';
+    unicodeBody.append(moreInfo);
+    const table = document.createElement('div');
+    table.className = 'unicode-alphabet';
+    table.append(document.getElementById('unicode-character-chart').content.cloneNode(true));
+    unicodeBody.append(table);
+    const explore = document.createElement('p');
+    explore.innerHTML = 'Explore more:<br><a href="https://unicode-explorer.com" target="_blank" rel="noopener noreferrer">https://unicode-explorer.com</a>';
+    unicodeBody.append(explore);
+    unicodePanel.append(unicodeBody);
+    activeFrame = frames[0];
+    async function turnFrame(frame, step) {
+      if (frame.dataset.turning === 'true' || viewTurning) return;
+      const section = Number(frame.dataset.section);
+      const slide = Number(frame.dataset.slide);
+      const count = sections[section].slides.length;
+      const next = (slide + step + count) % count;
+      if (next === slide) return;
+      const page = frame.querySelector('.page-sheet');
       const outgoing = page.cloneNode(true);
-      outgoing.removeAttribute('aria-live');
-      outgoing.setAttribute('aria-hidden', 'true');
       outgoing.inert = true;
-      outgoing.removeAttribute('id');
-      outgoing.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+      outgoing.setAttribute('aria-hidden', 'true');
       page.parentElement.append(outgoing);
-      outgoing.querySelector('.page-content').scrollTop = page.querySelector('.page-content').scrollTop;
-      turning = true;
+      frame.dataset.turning = 'true';
+      renderPage(frame, section, next);
       const animations = [];
-      let outgoingNumber;
       try {
-        renderPage(next, nextSlide);
-        const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
-        animations.push(outgoing.animate([
-          { transform: 'translate(0, 0)' },
-          { transform: `translate(${-x}%, ${-y}%)` }
-        ], options));
-        animations.push(page.animate([
-          { transform: `translate(${x}%, ${y}%)` },
-          { transform: 'translate(0, 0)' }
-        ], options));
-        if (changesSection) {
-          outgoingNumber = pageNumber.cloneNode(true);
-          outgoingNumber.removeAttribute('id');
-          outgoingNumber.setAttribute('aria-hidden', 'true');
-          outgoingNumber.textContent = previousNumber;
-          pageNumber.parentElement.append(outgoingNumber);
-          animations.push(outgoingNumber.animate([
-            { transform: 'translate(0, 0)' },
-            { transform: `translate(${-x}%, ${-y}%)` }
-          ], options));
-          animations.push(pageNumber.animate([
-            { transform: `translate(${x}%, ${y}%)` },
-            { transform: 'translate(0, 0)' }
-          ], options));
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
+          animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-step * 100}%)`}],options));
+          animations.push(page.animate([{transform:`translateY(${step * 100}%)`},{transform:'translateY(0)'}],options));
+          await Promise.all(animations.map(animation => animation.finished));
         }
-        await Promise.all(animations.map(animation => animation.finished));
       } finally {
         outgoing.remove();
-        outgoingNumber?.remove();
         animations.forEach(animation => animation.cancel());
-        turning = false;
+        frame.dataset.turning = 'false';
+        updateLayout();
       }
     }
-    function navigate(direction) {
-      if (aboutOpen) return;
-      if (direction === 'left' || direction === 'right') {
-        showPage(currentPage, direction, currentSlide + (direction === 'left' ? -1 : 1));
-      } else {
-        showPage(currentPage + (direction === 'top' ? -1 : 1), direction, 0);
+    function surface(name) { return name === 'website' ? about : name === 'unicode' ? unicodePanel : grid; }
+    async function switchView(next) {
+      if (viewTurning || next === view) return;
+      const previous = view;
+      const outgoing = surface(previous);
+      const incoming = surface(next);
+      viewTurning = true;
+      const outgoingMenu = directory.cloneNode(true);
+      outgoingMenu.inert = true;
+      outgoingMenu.setAttribute('aria-hidden', 'true');
+      main.append(outgoingMenu);
+      incoming.hidden = false;
+      incoming.inert = false;
+      incoming.setAttribute('aria-hidden', 'false');
+      outgoing.inert = true;
+      websiteToggle.querySelector('.item-label').textContent = next === 'content' ? 'Website' : 'Content';
+      unicodeToggle.closest('li').hidden = next !== 'content';
+      unicodeToggle.querySelector('.item-label').textContent = next === 'unicode' ? 'Content' : 'Unicode';
+      websiteToggle.setAttribute('aria-expanded', String(next === 'website'));
+      unicodeToggle.setAttribute('aria-expanded', String(next === 'unicode'));
+      view = next;
+      main.dataset.view = next;
+      document.querySelector('.unicode-result').hidden = next !== 'content';
+      const animations = [];
+      try {
+        updateLayout();
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
+          const direction = next === 'content' ? 1 : -1;
+          animations.push(incoming.animate([{transform:`translateY(${direction * 100}svh)`},{transform:'translateY(0)'}],options));
+          animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-direction * 100}svh)`}],options));
+          animations.push(directory.animate([{transform:`translateY(${direction * 100}svh)`},{transform:'translateY(0)'}],options));
+          animations.push(outgoingMenu.animate([{transform:'translateY(0)'},{transform:`translateY(${-direction * 100}svh)`}],options));
+          await Promise.all(animations.map(animation => animation.finished));
+        }
+      } finally {
+        outgoing.hidden = true;
+        outgoing.setAttribute('aria-hidden', 'true');
+        outgoingMenu.remove();
+        animations.forEach(animation => animation.cancel());
+        viewTurning = false;
+        updateLayout();
       }
     }
-    document.querySelectorAll('[data-page]').forEach(button => button.addEventListener('click', () => {
-      const section = Number(button.dataset.page);
-      if (section !== currentPage) showPage(section);
-    }));
-    document.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => {
-      navigate(['top', 'bottom', 'left', 'right'].find(direction => button.classList.contains(`triangle-${direction}`)));
-    }));
+    about.hidden = true;
+    websiteToggle.addEventListener('click', () => switchView(view === 'content' ? 'website' : 'content'));
+    unicodeToggle.addEventListener('click', () => switchView(view === 'unicode' ? 'content' : 'unicode'));
     document.addEventListener('keydown', event => {
-      if (aboutOpen || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-      const direction = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'top', ArrowDown: 'bottom' }[event.key];
-      if (direction) {
+      if (view !== 'content' || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
         event.preventDefault();
-        navigate(direction);
+        turnFrame(activeFrame, event.key === 'ArrowUp' ? -1 : 1);
       }
     });
-    let aboutOpen = false;
-    const main = document.querySelector('.content-page');
-    const about = document.querySelector('.about-page');
-    const viewToggle = document.querySelector('.view-toggle');
-    const frame = document.querySelector('.corner-frame');
-    function toggleAbout() {
-      if (turning) return;
-      aboutOpen = !aboutOpen;
-      main.classList.toggle('is-about', aboutOpen);
-      main.setAttribute('aria-label', aboutOpen ? 'About' : 'Content');
-      viewToggle.querySelector('.item-label').textContent = aboutOpen ? 'Content' : 'About';
-      viewToggle.setAttribute('aria-expanded', String(aboutOpen));
-      about.setAttribute('aria-hidden', String(!aboutOpen));
-      about.inert = !aboutOpen;
-      frame.inert = aboutOpen;
-      frame.setAttribute('aria-hidden', String(aboutOpen));
-      updateLayout();
+    function updateUnicodeResult() {
+      const projectFrames = frames.filter(frame => Number(frame.dataset.section) > 0);
+      if (projectFrames.length !== 4) return;
+      const digits = projectFrames.map(frame => Number(frame.dataset.slide || 0).toString(16).toUpperCase()).join('');
+      const code = parseInt(digits, 16);
+      const glyph = document.querySelector('.unicode-result-glyph');
+      const output = document.querySelector('.unicode-result');
+      const character = String.fromCodePoint(code);
+      glyph.textContent = code < 32 ? String.fromCodePoint(0x2400 + code) : code === 32 ? '␠' : code === 127 ? '␡' : character;
+      document.querySelector('.unicode-result-code').textContent = `U+${digits}`;
+      output.setAttribute('aria-label', `Unicode U+${digits}${code < 32 ? ', control character' : ''}`);
     }
-    viewToggle.addEventListener('click', toggleAbout);
-    const directory = document.querySelector('.circles');
     function updateLayout() {
-      const frameBounds = frame.getBoundingClientRect();
-      frame.style.setProperty('--section-number-size', `${frameBounds.height * 0.96}px`);
-      // Visibility preserves layout so hidden entries can still be measured.
-      const overlaps = [...directory.querySelectorAll('.directory-button')].some(button => {
-        const bounds = button.getBoundingClientRect();
-        return bounds.right >= frameBounds.left && bounds.left <= frameBounds.right
-          && bounds.bottom >= frameBounds.top && bounds.top <= frameBounds.bottom;
+      const columns = window.innerWidth > 1100 ? 4 : window.innerWidth > 650 ? 2 : 1;
+      const rows = 4 / columns;
+      const gap = 64;
+      const availableWidth = window.innerWidth - 48 - gap * (columns - 1);
+      const availableHeight = Math.max(200, window.innerHeight - 300 - gap * (rows - 1));
+      const width = columns === 1 ? Math.min(650, availableWidth) : Math.max(80, Math.min(availableWidth / columns, availableHeight / rows * 650 / 850));
+      grid.style.setProperty('--frame-width', `${width}px`);
+      grid.style.setProperty('--frame-columns', columns);
+      grid.classList.toggle('single-column', columns === 1);
+      main.style.minHeight = `${view === 'content' ? (columns === 1 ? Math.max(window.innerHeight, 300 + 4 * width * 850 / 650 + 3 * gap) : window.innerHeight) : Math.max(window.innerHeight, surface(view).scrollHeight)}px`;
+      frames.forEach(frame => {
+        if (frame.closest('[hidden]')) return;
+        frame.style.setProperty('--section-number-size', `${frame.getBoundingClientRect().height * 0.96}px`);
+        alignDraftCodes(frame);
+        alignDerivationArrows(frame);
+        layoutNestedCharacters(frame);
       });
-      directory.classList.toggle('is-obscured', overlaps);
-      directory.querySelectorAll('.section-entry').forEach(entry => { entry.inert = overlaps || aboutOpen; });
     }
-    const layoutObserver = new ResizeObserver(updateLayout);
-    layoutObserver.observe(document.querySelector('.content-page'));
-    layoutObserver.observe(frame);
-    layoutObserver.observe(directory);
+    const observer = new ResizeObserver(updateLayout);
+    frames.forEach(frame => observer.observe(frame));
     window.addEventListener('resize', updateLayout);
     document.fonts.ready.then(updateLayout);
     updateLayout();
-    renderPage(0);
   </script>
 </body>
 </html>
