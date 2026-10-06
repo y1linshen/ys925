@@ -479,6 +479,17 @@
     .draft-alternate .alternate-glyph > .draft-code { position: static; display: block; writing-mode: horizontal-tb; transform: none; font-size: 3cqw; line-height: 1; }
     .corner-frame[data-section="1"][data-slide="4"] .self-derivation { transform: none; }
     .corner-frame[data-section="1"][data-slide="4"] .derivation-glyph { justify-content: flex-start; padding-left: 0; }
+
+    body { overflow-x: clip; }
+    .page-sheet { width: 100%; transform: translate3d(0,0,0); }
+    .corner-frame[data-section="2"][data-slide="0"] .unicode-intro,
+    .corner-frame[data-section="3"][data-slide="0"] .ids-intro { font-size: 6.5cqw !important; }
+    .hex-equation { grid-template-columns: minmax(0, 1fr) 1ch 14.4cqw; column-gap: 2cqw; width: 100%; }
+    .hex-demonstration { font-size: 12.5cqw; }
+    .corner-frame[data-section="1"][data-slide="4"] .derivation-row:not(:nth-child(2)) .derivation-glyph { width: 27cqw; justify-content: center; }
+    .ids-description-row > span:nth-child(2) { font-size: 1.5625em; }
+    .draft-row:last-child .draft-alternate > .draft-code,
+    .draft-row:last-child .draft-alternate .alternate-glyph > .draft-code { font-size: 3cqw; }
   </style>
 </head>
 <body>
@@ -508,7 +519,7 @@
 
 <template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="ids-letter-row"><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span></div><div class="ids-letter-row"><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span></div><div class="ids-letter-row"><span>Y</span><span>Z</span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span></div><div class="ids-letter-row"><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span><span>n</span></div><div class="ids-letter-row"><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span></div><div class="ids-letter-row"><span>w</span><span>x</span><span>y</span><span>z</span><span>1</span><span>2</span><span>3</span><span>4</span></div><div class="ids-letter-row"><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span><span>!</span><span>@</span></div><div class="ids-letter-row"><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
 <template id="ids-page-5"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Word</div></div></template>
-<template id="ids-page-6"><div class="ids-flow ids-justified"><div>Ideographic</div><div>Description</div><div>Sequences</div><div>Typography</div><div>-ish</div><div>Method</div></div></template>
+<template id="ids-page-6"><div class="ids-flow ids-justified"><div>Ideographic</div><div>Description</div><div>Sequences</div><div>Typography-</div><div>ish</div><div>Method</div></div></template>
 <template id="ids-page-7"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Sentence</div></div></template>
 <template id="ids-page-8"><div class="ids-flow ids-justified"><div>The</div><div>&#32;quick</div><div>&#32;&#32;brown</div><div>&#32;&#32;&#32;fox</div><div>&#32;&#32;&#32;&#32;jumps</div><div>&#32;&#32;&#32;&#32;&#32;over</div><div>&#32;&#32;&#32;&#32;&#32;&#32;the</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;lazy</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dog.</div></div></template>
 
@@ -682,7 +693,7 @@
     const titles = ['1 Unicode', '2 _Self', '3 _Hexadecimal Code', '4 _Ideographic Description Symbols', '5 _ Drafts'];
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
-    const hexPosterImages = ["assets/hex-posters/poster-1.jpg", "assets/hex-posters/poster-2.jpg", "assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg"];
+    const hexPosterImages = ["assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg", "assets/hex-posters/poster-1.jpg", "assets/hex-posters/poster-2.jpg"];
     const hexPosterPreviews = hexPosterImages.map(source => source.replace(/\.jpg$/, '.webp'));
     const posterPreviewCache = new Map();
     function preparePoster(index) {
@@ -779,11 +790,7 @@
     }
     function alignDerivationArrows(frame) {
       const chart = frame.querySelector('.self-derivation');
-      const original = frame.querySelector('.derivation-original');
-      if (!chart || !original) return;
-      const bounds = original.getBoundingClientRect();
-      chart.style.setProperty('--derivation-arrow-x', `${bounds.left + bounds.width / 2 - chart.getBoundingClientRect().left}px`);
-
+      if (chart) chart.style.setProperty('--derivation-arrow-x', '13.5cqw');
     }
     function renderPage(frame, index, slide = 0) {
       const currentPage = Math.max(0, Math.min(titles.length - 1, index));
@@ -976,8 +983,8 @@
         if (image) await preparePoster(next - 2);
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
           const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
-          animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-step * 100}%)`}],options));
-          animations.push(page.animate([{transform:`translateY(${step * 100}%)`},{transform:'translateY(0)'}],options));
+          animations.push(outgoing.animate([{transform:'translate3d(0,0,0)'},{transform:`translate3d(0,${-step * 100}%,0)`}],options));
+          animations.push(page.animate([{transform:`translate3d(0,${step * 100}%,0)`},{transform:'translate3d(0,0,0)'}],options));
           await Promise.all(animations.map(animation => animation.finished));
         }
       } finally {
@@ -1032,8 +1039,8 @@
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
           const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
           const direction = next === 'content' ? 1 : -1;
-          animations.push(incoming.animate([{transform:`translateY(${direction * 100}svh)`},{transform:'translateY(0)'}],options));
-          animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-direction * 100}svh)`}],options));
+          animations.push(incoming.animate([{transform:`translate3d(0,${direction * 100}svh,0)`},{transform:'translate3d(0,0,0)'}],options));
+          animations.push(outgoing.animate([{transform:'translate3d(0,0,0)'},{transform:`translate3d(0,${-direction * 100}svh,0)`}],options));
           await Promise.all(animations.map(animation => animation.finished));
         }
       } finally {
@@ -1074,9 +1081,9 @@
       grid.style.columnGap = `${gap}px`;
       const availableWidth = document.documentElement.clientWidth - 48 - gap * (columns - 1);
       const originalWidth = (document.documentElement.clientWidth - 48 - 64 * (columns - 1)) / columns;
-      const width = columns === 4
+      const width = Math.floor(columns === 4
         ? Math.min(715, originalWidth * 1.1, availableWidth / columns)
-        : Math.min(650, availableWidth / columns);
+        : Math.min(650, availableWidth / columns));
       grid.style.setProperty('--frame-width', `${width}px`);
       grid.style.setProperty('--frame-columns', columns);
       grid.classList.toggle('single-column', columns === 1);
