@@ -508,6 +508,8 @@
     .page-sheet[data-section="3"][data-slide="1"] .ids-intro { justify-content: flex-start; font-size: 6.5cqw !important; }
 
     .page-sheet[data-section="3"][data-slide="7"] .ids-specimen-label { font-size: 16.2cqw; }
+
+    .page-sheet[data-section="3"][data-slide="8"] .ids-flow { font-size: 10.8cqw; }
   </style>
 </head>
 <body>
@@ -712,7 +714,7 @@
     const titles = ['1 Unicode', '2 _Self', '3 _Hexadecimal Code', '4 _Ideographic Description Symbols', '5 _ Drafts'];
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
-    const hexPosterImages = ["assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg", "assets/hex-posters/through-a-hex-6.jpg", "assets/hex-posters/through-a-hex-5.jpg", "assets/hex-posters/through-a-hex-8.jpg", "assets/hex-posters/through-a-hex-7.jpg"];
+    const hexPosterImages = ["assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg", "assets/hex-posters/through-a-hex-8.jpg", "assets/hex-posters/through-a-hex-7.jpg", "assets/hex-posters/through-a-hex-6.jpg"];
     const hexPosterPreviews = hexPosterImages.map(source => source.replace(/\.jpg$/, '.webp'));
     const posterPreviewCache = new Map();
     function preparePoster(index) {
