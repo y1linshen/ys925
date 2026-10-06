@@ -425,6 +425,29 @@
     .ids-examples-lined .ids-example:nth-child(odd)::after { left: -18.75%; width: 275%; }
     .ids-justified { display: flex; flex-direction: column; justify-content: space-between; }
     .ids-justified > .ids-specimen-label { font-size: 27cqw; white-space: nowrap; }
+
+    .project-caption { top: auto; bottom: calc(100% + 49px); }
+    .corner-frame[data-section="1"][data-slide="4"] .self-derivation,
+    .corner-frame[data-section="4"] .draft-chart { transform: translateX(30px); }
+    .poster-lightbox { inset: 0; margin: auto; width: 100vw; height: 100dvh; padding: 0; background: transparent; overflow: hidden; cursor: zoom-out; }
+    .poster-lightbox img { display: block; object-fit: contain; }
+    .corner-frame[data-section="3"][data-slide="0"] .page-content { padding: 1.5cqw; }
+    .corner-frame[data-section="3"][data-slide="0"] .ids-intro { justify-content: flex-start; gap: 1em; }
+    .ids-description-list { grid-template-rows: repeat(6, 1fr); }
+    .ids-description { font-size: 4.2cqw; }
+    .ids-description > p { margin-left: 0; }
+    .ids-description-row > span:nth-child(2) { transform: none; }
+    .ids-examples-lined .ids-example { width: 66.116%; }
+    .ids-examples-lined .ids-example:nth-child(odd)::after { left: -25.625%; width: 302.5%; }
+    .ids-justified > .ids-specimen-label { font-size: 20.25cqw; transform: none; }
+    .corner-frame[data-section="3"][data-specimen="6"] .ids-justified,
+    .corner-frame[data-section="3"][data-specimen="8"] .ids-justified { justify-content: flex-start; gap: 0; font-size: 13.5cqw; line-height: .5; }
+    .corner-frame[data-section="3"][data-specimen="6"] .ids-flow > div,
+    .corner-frame[data-section="3"][data-specimen="8"] .ids-flow > div { min-height: .5em; text-align: left; text-align-last: left; }
+
+    .unicode-alphabet { aspect-ratio: 650 / 1020; margin-left: 0; }
+    .unicode-alphabet .character-cell { justify-content: flex-start; padding-left: 0; }
+    .unicode-alphabet .character-glyph { text-align: left; }
   </style>
 </head>
 <body>
@@ -444,16 +467,17 @@
     <section class="unicode-panel" hidden aria-label="About Unicode"></section>
 
   </main>
-<template id="ids-page-0"><div class="ids-intro"><h2>Ideographic Description Characters</h2><p>Based on the sixteen ideographic description characters shown on the next page, any CJK character can be described as a structural combination of ideographic description characters and existing Unicode CJK components.</p></div></template>
+<template id="ids-page-0"><div class="ids-intro"><p>Based on the sixteen ideographic description characters shown on the next page, any CJK character can be described as a structural combination of ideographic description characters and existing Unicode CJK components.</p><p>Extending the same logic, Latin characters can also be constructed through ideographic description characters combined with existing Unicode Latin forms.</p></div></template>
 
 
 
 
-<template id="ids-intro-continuation"><div class="ids-intro"><h2>Ideographic Description Characters</h2><p>Extending the same logic, Latin characters can also be constructed through ideographic description characters combined with existing Unicode Latin forms.</p></div></template>
-<template id="ids-page-1"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
-<template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span></div><div class="ids-letter-row"><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span></div><div class="ids-letter-row"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span></div><div class="ids-letter-row"><span>n</span><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span><span>w</span><span>x</span><span>y</span><span>z</span></div><div class="ids-letter-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></div><div class="ids-letter-row"><span>!</span><span>@</span><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
+<template id="ids-page-1"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div></div></div></template>
+<template id="ids-description-continuation"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
+
+<template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="ids-letter-row"><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span></div><div class="ids-letter-row"><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span></div><div class="ids-letter-row"><span>Y</span><span>Z</span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span></div><div class="ids-letter-row"><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span><span>n</span></div><div class="ids-letter-row"><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span></div><div class="ids-letter-row"><span>w</span><span>x</span><span>y</span><span>z</span><span>1</span><span>2</span><span>3</span><span>4</span></div><div class="ids-letter-row"><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span><span>!</span><span>@</span></div><div class="ids-letter-row"><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
 <template id="ids-page-5"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Word</div></div></template>
-<template id="ids-page-6"><div class="ids-flow ids-justified"><div>Ideographic</div><div>Description</div><div>Sequences</div><div>Typography-ish</div><div>Method</div></div></template>
+<template id="ids-page-6"><div class="ids-flow ids-justified"><div>Ideographic</div><div>Description</div><div>Sequences</div><div>Typography</div><div>-ish</div><div>Method</div></div></template>
 <template id="ids-page-7"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Sentence</div></div></template>
 <template id="ids-page-8"><div class="ids-flow ids-justified"><div>The</div><div>&#32;quick</div><div>&#32;&#32;brown</div><div>&#32;&#32;&#32;fox</div><div>&#32;&#32;&#32;&#32;jumps</div><div>&#32;&#32;&#32;&#32;&#32;over</div><div>&#32;&#32;&#32;&#32;&#32;&#32;the</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;lazy</div><div>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dog.</div></div></template>
 
@@ -715,7 +739,7 @@
       const showsIntro = currentPage === 0 && currentSlide === 0;
       const showsDraft = currentPage === 4;
       const showsIDS = currentPage === 3;
-      const specimen = showsIDS && currentSlide > 1 ? currentSlide - 1 : currentSlide;
+      const specimen = showsIDS && currentSlide > 2 ? currentSlide - 1 : currentSlide === 2 ? 1 : currentSlide;
       frame.dataset.specimen = specimen;
       frame.querySelector('.page-content').classList.toggle('is-ids-page', showsIDS);
       const showsHexIntro = currentPage === 2 && currentSlide === 0;
@@ -735,7 +759,7 @@
       pageBody.replaceChildren();
       if (showsIntro) pageBody.append(document.getElementById('unicode-intro').content.cloneNode(true));
       else if (showsDraft) pageBody.append(document.getElementById(`draft-page-${currentSlide}`).content.cloneNode(true));
-      else if (showsIDS) pageBody.append(document.getElementById(currentSlide === 1 ? 'ids-intro-continuation' : `ids-page-${specimen}`).content.cloneNode(true));
+      else if (showsIDS) pageBody.append(document.getElementById(currentSlide === 2 ? 'ids-description-continuation' : `ids-page-${specimen}`).content.cloneNode(true));
       else if (showsHexPoster) {
         const image = document.createElement('img');
         image.className = 'hex-poster-image';
@@ -879,7 +903,7 @@
       const animations = [];
       try {
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
+          const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
           animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-step * 100}%)`}],options));
           animations.push(page.animate([{transform:`translateY(${step * 100}%)`},{transform:'translateY(0)'}],options));
           await Promise.all(animations.map(animation => animation.finished));
@@ -893,10 +917,10 @@
     }
     const posterDialog = document.createElement('dialog');
     posterDialog.className = 'poster-lightbox';
-    posterDialog.innerHTML = '<button aria-label="Close enlarged image">×</button><img alt="">';
+    posterDialog.innerHTML = '<img alt="">';
+    posterDialog.setAttribute('aria-label', 'Enlarged poster. Click anywhere to close.');
     document.body.append(posterDialog);
-    posterDialog.querySelector('button').onclick = () => posterDialog.close();
-    posterDialog.onclick = event => { if (event.target === posterDialog) posterDialog.close(); };
+    posterDialog.onclick = () => posterDialog.close();
     function openPoster(image) { const enlarged = posterDialog.querySelector('img'); enlarged.src = image.src; enlarged.alt = image.alt; posterDialog.showModal(); }
     function surface(name) { return name === 'website' ? about : name === 'unicode' ? unicodePanel : grid; }
     async function switchView(next) {
@@ -921,7 +945,7 @@
       try {
         updateLayout();
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          const options = { duration: 500, easing: 'ease-in-out', fill: 'both' };
+          const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
           const direction = next === 'content' ? 1 : -1;
           animations.push(incoming.animate([{transform:`translateY(${direction * 100}svh)`},{transform:'translateY(0)'}],options));
           animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-direction * 100}svh)`}],options));
@@ -971,13 +995,6 @@
       frames.forEach(frame => {
         if (frame.closest('[hidden]')) return;
         frame.style.setProperty('--section-number-size', `${frame.getBoundingClientRect().height * 0.96}px`);
-        const label = frame.querySelector('.ids-specimen-label');
-        if (label) {
-          label.style.transform = '';
-          const ratio = Math.min(1, label.parentElement.clientWidth / label.scrollWidth);
-          label.style.transformOrigin = 'left center';
-          label.style.transform = `scaleX(${ratio})`;
-        }
         alignDraftCodes(frame);
         alignDerivationArrows(frame);
         layoutNestedCharacters(frame);
