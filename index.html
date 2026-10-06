@@ -469,6 +469,16 @@
     .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .72; }
     .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
     .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .72em; }
+
+    .directory-button .item-label { font-weight: 400; }
+    .about-body { font-weight: 500; }
+    .ids-description-row > span:nth-child(2) { font-size: 1.25em; }
+    .corner-frame[data-section="3"][data-slide="5"] .ids-flow { font-size: 13.5cqw; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-justified { line-height: .792; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div { min-height: .792em; }
+    .draft-alternate .alternate-glyph > .draft-code { position: static; display: block; writing-mode: horizontal-tb; transform: none; font-size: 3cqw; line-height: 1; }
+    .corner-frame[data-section="1"][data-slide="4"] .self-derivation { transform: none; }
+    .corner-frame[data-section="1"][data-slide="4"] .derivation-glyph { justify-content: flex-start; padding-left: 0; }
   </style>
 </head>
 <body>
@@ -773,11 +783,7 @@
       if (!chart || !original) return;
       const bounds = original.getBoundingClientRect();
       chart.style.setProperty('--derivation-arrow-x', `${bounds.left + bounds.width / 2 - chart.getBoundingClientRect().left}px`);
-      const reference = chart.querySelector('.derivation-row:nth-child(3) .derivation-glyph');
-      const encoding = chart.querySelector('.derivation-row:nth-child(2) .derivation-glyph');
-      const range = document.createRange();
-      range.selectNodeContents(reference);
-      encoding.style.paddingLeft = `${Math.max(0, range.getBoundingClientRect().left - encoding.getBoundingClientRect().left)}px`;
+
     }
     function renderPage(frame, index, slide = 0) {
       const currentPage = Math.max(0, Math.min(titles.length - 1, index));
