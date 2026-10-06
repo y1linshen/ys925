@@ -448,6 +448,15 @@
     .unicode-alphabet { aspect-ratio: 650 / 1020; margin-left: 0; }
     .unicode-alphabet .character-cell { justify-content: flex-start; padding-left: 0; }
     .unicode-alphabet .character-glyph { text-align: left; }
+
+    html { scrollbar-gutter: stable; }
+    .page-content { overflow: hidden; }
+    .page-sheet { backface-visibility: hidden; }
+    .ids-description-list { height: 100%; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-justified,
+    .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .6; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
+    .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .6em; }
   </style>
 </head>
 <body>
@@ -472,8 +481,8 @@
 
 
 
-<template id="ids-page-1"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div></div></div></template>
-<template id="ids-description-continuation"><div class="ids-description"><p class="ids-description-title">Ideographic Description Characters</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
+<template id="ids-page-1"><div class="ids-description"><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div></div></div></template>
+<template id="ids-description-continuation"><div class="ids-description"><div class="ids-description-list"><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
 
 <template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="ids-letter-row"><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span></div><div class="ids-letter-row"><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span></div><div class="ids-letter-row"><span>Y</span><span>Z</span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span></div><div class="ids-letter-row"><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span><span>n</span></div><div class="ids-letter-row"><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span></div><div class="ids-letter-row"><span>w</span><span>x</span><span>y</span><span>z</span><span>1</span><span>2</span><span>3</span><span>4</span></div><div class="ids-letter-row"><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span><span>!</span><span>@</span></div><div class="ids-letter-row"><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
 <template id="ids-page-5"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Word</div></div></template>
@@ -681,6 +690,7 @@
       const root = wrapper.querySelector('.nested-root');
       const level = Number(root.dataset.level);
       const context = document.createElement('canvas').getContext('2d');
+      const glyphMetrics = new Map();
       context.font = '400 100px "A-side Inside I"';
       const measure = context.measureText('0');
       const glyphWidth = measure.actualBoundingBoxLeft + measure.actualBoundingBoxRight;
@@ -704,13 +714,18 @@
       root.style.setProperty('--nested-space', `${space}px`);
       root.style.setProperty('--nested-stroke', `${stroke}px`);
       wrapper.querySelectorAll('.nested-digit svg').forEach(svg => {
-        const metrics = context.measureText(svg.textContent);
+        if (svg.dataset.measured === 'true') return;
+        let metrics = glyphMetrics.get(svg.textContent);
+        if (!metrics) { metrics = context.measureText(svg.textContent); glyphMetrics.set(svg.textContent, metrics); }
+        svg.dataset.measured = 'true';
         svg.setAttribute('viewBox', `${-metrics.actualBoundingBoxLeft} ${-metrics.actualBoundingBoxAscent} ${metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight} ${metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent}`);
       });
     }
     function alignDraftCodes(frame) {
+      const items = frame.querySelectorAll('.draft-alternate');
+      if (!items.length) return;
       const canvas = document.createElement('canvas').getContext('2d');
-      frame.querySelectorAll('.draft-alternate').forEach(item => {
+      items.forEach(item => {
         const glyph = item.querySelector('.alternate-glyph');
         const style = getComputedStyle(glyph);
         canvas.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
@@ -901,7 +916,10 @@
       frame.dataset.turning = 'true';
       renderPage(frame, section, next);
       const animations = [];
+      page.style.willChange = outgoing.style.willChange = 'transform';
       try {
+        const image = page.querySelector('.hex-poster-image');
+        if (image) await image.decode().catch(() => {});
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
           const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
           animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-step * 100}%)`}],options));
@@ -911,8 +929,8 @@
       } finally {
         outgoing.remove();
         animations.forEach(animation => animation.cancel());
+        page.style.willChange = '';
         frame.dataset.turning = 'false';
-        updateLayout();
       }
     }
     const posterDialog = document.createElement('dialog');
@@ -986,7 +1004,7 @@
       const columns = window.innerWidth > 1100 ? 4 : window.innerWidth > 650 ? 2 : 1;
       const rows = 4 / columns;
       const gap = 64;
-      const availableWidth = window.innerWidth - 48 - gap * (columns - 1);
+      const availableWidth = document.documentElement.clientWidth - 48 - gap * (columns - 1);
       const width = Math.min(650, availableWidth / columns);
       grid.style.setProperty('--frame-width', `${width}px`);
       grid.style.setProperty('--frame-columns', columns);
@@ -994,16 +1012,29 @@
       main.style.minHeight = `${view === 'content' ? Math.max(window.innerHeight, 400 + rows * width * 850 / 650 + (rows - 1) * 96) : Math.max(window.innerHeight, surface(view).scrollHeight)}px`;
       frames.forEach(frame => {
         if (frame.closest('[hidden]')) return;
-        frame.style.setProperty('--section-number-size', `${frame.getBoundingClientRect().height * 0.96}px`);
+        const frameWidth = frame.getBoundingClientRect().width;
+        const layoutKey = `${frameWidth}:${frame.dataset.section}:${frame.dataset.slide}`;
+        if (frame.dataset.layoutKey === layoutKey) return;
+        frame.dataset.layoutKey = layoutKey;
+        frame.style.setProperty('--section-number-size', `${frameWidth * 850 / 650 * 0.96}px`);
         alignDraftCodes(frame);
         alignDerivationArrows(frame);
         layoutNestedCharacters(frame);
       });
     }
-    const observer = new ResizeObserver(updateLayout);
+    let layoutPending = false;
+    function scheduleLayout() {
+      if (layoutPending) return;
+      layoutPending = true;
+      requestAnimationFrame(() => { layoutPending = false; updateLayout(); });
+    }
+    const observer = new ResizeObserver(scheduleLayout);
     frames.forEach(frame => observer.observe(frame));
-    window.addEventListener('resize', updateLayout);
-    document.fonts.ready.then(updateLayout);
+    window.addEventListener('resize', scheduleLayout);
+    document.fonts.ready.then(() => {
+      frames.forEach(frame => { delete frame.dataset.layoutKey; frame.querySelectorAll('[data-measured]').forEach(svg => delete svg.dataset.measured); });
+      scheduleLayout();
+    });
     updateLayout();
   </script>
 </body>
