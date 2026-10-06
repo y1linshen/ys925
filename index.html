@@ -457,6 +457,18 @@
     .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .6; }
     .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
     .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .6em; }
+
+    .directory-button .item-label, .about-body { font-weight: 400; }
+    .hex-poster-image:focus, .hex-poster-image:focus-visible,
+    .project-grid .corner-frame:focus, .project-grid .corner-frame:focus-visible { outline: none; }
+    .derivation-glyph { justify-content: center; padding-left: 0; }
+    .derivation-row:nth-child(2) .derivation-glyph { justify-content: flex-start; }
+    .ids-description-row > span:nth-child(2) { transform: translateX(-20px); }
+    .corner-frame[data-section="3"][data-slide="5"] .ids-flow { font-size: 10.8cqw; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-justified,
+    .corner-frame[data-section="3"][data-slide="9"] .ids-justified { line-height: .72; }
+    .corner-frame[data-section="3"][data-slide="7"] .ids-flow > div,
+    .corner-frame[data-section="3"][data-slide="9"] .ids-flow > div { min-height: .72em; }
   </style>
 </head>
 <body>
@@ -661,6 +673,24 @@
     // Replace each empty string with the content for that section's slide.
     const sections = titles.map(title => ({ title, slides: ['', ''] }));
     const hexPosterImages = ["assets/hex-posters/poster-1.jpg", "assets/hex-posters/poster-2.jpg", "assets/hex-posters/poster-3.jpg", "assets/hex-posters/poster-4.jpg", "assets/hex-posters/poster-5.jpg", "assets/hex-posters/poster-6.jpg"];
+    const hexPosterPreviews = hexPosterImages.map(source => source.replace(/\.jpg$/, '.webp'));
+    const posterPreviewCache = new Map();
+    function preparePoster(index) {
+      if (index < 0 || index >= hexPosterPreviews.length) return Promise.resolve();
+      if (!posterPreviewCache.has(index)) {
+        const image = new Image();
+        image.decoding = 'async';
+        image.src = hexPosterPreviews[index];
+        posterPreviewCache.set(index, { image, ready: image.decode().catch(() => {}) });
+      }
+      return posterPreviewCache.get(index).ready;
+    }
+    function prepareNeighborPosters(slide) {
+      const index = slide - 2;
+      preparePoster(index);
+      preparePoster(index + 1);
+      preparePoster(index - 1);
+    }
     sections[2].slides.push(...hexPosterImages.map(() => ''));
     sections[4].slides = Array(4).fill('');
     sections[3].slides = Array(10).fill('');
@@ -743,6 +773,11 @@
       if (!chart || !original) return;
       const bounds = original.getBoundingClientRect();
       chart.style.setProperty('--derivation-arrow-x', `${bounds.left + bounds.width / 2 - chart.getBoundingClientRect().left}px`);
+      const reference = chart.querySelector('.derivation-row:nth-child(3) .derivation-glyph');
+      const encoding = chart.querySelector('.derivation-row:nth-child(2) .derivation-glyph');
+      const range = document.createRange();
+      range.selectNodeContents(reference);
+      encoding.style.paddingLeft = `${Math.max(0, range.getBoundingClientRect().left - encoding.getBoundingClientRect().left)}px`;
     }
     function renderPage(frame, index, slide = 0) {
       const currentPage = Math.max(0, Math.min(titles.length - 1, index));
@@ -773,12 +808,27 @@
       frame.querySelector('.page-content').classList.toggle('is-character-table', showsCharacterTable || showsSelfChart || showsSelfComparison);
       pageBody.replaceChildren();
       if (showsIntro) pageBody.append(document.getElementById('unicode-intro').content.cloneNode(true));
-      else if (showsDraft) pageBody.append(document.getElementById(`draft-page-${currentSlide}`).content.cloneNode(true));
+      else if (showsDraft) {
+        pageBody.append(document.getElementById(`draft-page-${currentSlide}`).content.cloneNode(true));
+        pageBody.querySelectorAll('.draft-row').forEach((row, rowIndex) => {
+          const point = 0x41 + currentSlide * 5 + rowIndex;
+          const character = String.fromCodePoint(point);
+          const code = point.toString(16).toUpperCase().padStart(4, '0');
+          row.querySelector('.draft-original').textContent = character;
+          const label = row.querySelector('.draft-badge, .draft-result > .draft-code, .draft-alternate > .draft-code');
+          if (label) label.textContent = currentSlide === 1 ? `+${code}` : rowIndex === 2 && currentSlide === 0 ? `(U+${code})` : `U+${code}`;
+          const scribble = row.querySelector('.draft-scribble');
+          if (scribble) scribble.setAttribute('aria-label', `Experimental glyph ${character}`);
+        });
+      }
       else if (showsIDS) pageBody.append(document.getElementById(currentSlide === 2 ? 'ids-description-continuation' : `ids-page-${specimen}`).content.cloneNode(true));
       else if (showsHexPoster) {
         const image = document.createElement('img');
         image.className = 'hex-poster-image';
-        image.src = hexPosterImages[currentSlide - 2];
+        image.decoding = 'async';
+        image.src = hexPosterPreviews[currentSlide - 2];
+        image.dataset.original = hexPosterImages[currentSlide - 2];
+        prepareNeighborPosters(currentSlide);
         image.alt = `Windows poster study ${currentSlide - 1}`;
         image.tabIndex = 0;
         image.setAttribute('role', 'button');
@@ -887,16 +937,18 @@
     unicodeBody.append(document.getElementById('unicode-intro').content.cloneNode(true));
     const moreInfo = document.createElement('p');
     moreInfo.innerHTML = 'More Info:<br><a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Unicode</a>';
-    unicodeBody.append(moreInfo);
     const table = document.createElement('div');
     table.className = 'unicode-alphabet';
     table.append(document.getElementById('unicode-character-chart').content.cloneNode(true));
     unicodeBody.append(table);
+    unicodeBody.append(moreInfo);
     const explore = document.createElement('p');
     explore.innerHTML = 'Explore more:<br><a href="https://unicode-explorer.com" target="_blank" rel="noopener noreferrer">https://unicode-explorer.com</a>';
-    unicodeBody.append(explore);
+    moreInfo.append(document.createElement('br'), ...explore.childNodes);
     unicodePanel.append(unicodeBody);
     activeFrame = frames[0];
+    if ('requestIdleCallback' in window) requestIdleCallback(() => preparePoster(0));
+    else setTimeout(() => preparePoster(0), 300);
     async function turnFrame(frame, step) {
       if (frame.dataset.turning === 'true' || viewTurning) return;
       const section = Number(frame.dataset.section);
@@ -915,7 +967,7 @@
       page.style.willChange = outgoing.style.willChange = 'transform';
       try {
         const image = page.querySelector('.hex-poster-image');
-        if (image) await image.decode().catch(() => {});
+        if (image) await preparePoster(next - 2);
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
           const options = { duration: 550, easing: 'ease-in-out', fill: 'both' };
           animations.push(outgoing.animate([{transform:'translateY(0)'},{transform:`translateY(${-step * 100}%)`}],options));
@@ -935,7 +987,20 @@
     posterDialog.setAttribute('aria-label', 'Enlarged poster. Click anywhere to close.');
     document.body.append(posterDialog);
     posterDialog.onclick = () => posterDialog.close();
-    function openPoster(image) { const enlarged = posterDialog.querySelector('img'); enlarged.src = image.src; enlarged.alt = image.alt; posterDialog.showModal(); }
+    let enlargedPosterRequest = 0;
+    function openPoster(image) {
+      const enlarged = posterDialog.querySelector('img');
+      const request = ++enlargedPosterRequest;
+      enlarged.src = image.src;
+      enlarged.alt = image.alt;
+      posterDialog.showModal();
+      const original = new Image();
+      original.decoding = 'async';
+      original.src = image.dataset.original || image.src;
+      original.decode().then(() => {
+        if (posterDialog.open && request === enlargedPosterRequest) enlarged.src = original.src;
+      }).catch(() => {});
+    }
     function surface(name) { return name === 'website' ? about : name === 'unicode' ? unicodePanel : grid; }
     async function switchView(next) {
       if (viewTurning || next === view) return;
