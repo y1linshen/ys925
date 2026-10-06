@@ -853,10 +853,6 @@
     function createFrame(section, parent) {
       const frame = document.getElementById('project-frame').content.firstElementChild.cloneNode(true);
       parent.append(frame);
-      const caption = document.createElement('p');
-      caption.className = 'project-caption';
-      caption.textContent = ['Self', 'Hexadecimal', 'Ideographic Description Characters', '*Drafts'][section - 1];
-      frame.append(caption);
       frame.tabIndex = 0;
       frame.setAttribute('aria-label', titles[section]);
       frame.addEventListener('pointerenter', () => activeFrame = frame);
@@ -1003,9 +999,13 @@
     function updateLayout() {
       const columns = window.innerWidth > 1100 ? 4 : window.innerWidth > 650 ? 2 : 1;
       const rows = 4 / columns;
-      const gap = 64;
+      const gap = columns === 4 ? 28 : 64;
+      grid.style.columnGap = `${gap}px`;
       const availableWidth = document.documentElement.clientWidth - 48 - gap * (columns - 1);
-      const width = Math.min(650, availableWidth / columns);
+      const originalWidth = (document.documentElement.clientWidth - 48 - 64 * (columns - 1)) / columns;
+      const width = columns === 4
+        ? Math.min(715, originalWidth * 1.1, availableWidth / columns)
+        : Math.min(650, availableWidth / columns);
       grid.style.setProperty('--frame-width', `${width}px`);
       grid.style.setProperty('--frame-columns', columns);
       grid.classList.toggle('single-column', columns === 1);
