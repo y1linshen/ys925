@@ -526,6 +526,10 @@
     }
 
     .page-sheet[data-section="3"][data-slide="9"] .ids-specimen-label { font-size: 15.1875cqw; }
+
+    .self-process:not(.self-process-xyz) .process-row:nth-child(2)::after { bottom: -3.5cqw; }
+    .derivation-row:not(:last-child)::after { left: var(--arrow-x); top: var(--arrow-y); bottom: auto; transform: translate(-50%, -50%); }
+    .ids-description .ids-abbreviation { margin: 0 0 2cqw 20%; color: #aaa; font-size: 2.2cqw; line-height: 1.2; }
   </style>
 </head>
 <body>
@@ -551,8 +555,8 @@
 
 
 
-<template id="ids-page-1"><div class="ids-description"><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>Ideographic description character left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>Ideographic description character above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>Ideographic description character left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>Ideographic description character above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>Ideographic description character full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>Ideographic description character surround from above</span></div></div></div></template>
-<template id="ids-description-continuation"><div class="ids-description"><div class="ids-description-list"><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>Ideographic description character surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>Ideographic description character surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>Ideographic description character surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>Ideographic description character surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>Ideographic description character surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>Ideographic description character overlaid</span></div></div></div></template>
+<template id="ids-page-1"><div class="ids-description"><p class="ids-abbreviation">ids = Ideographic description character</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF0</span><span class="ids-description-symbol">⿰</span><span>ids left to right</span></div><div class="ids-description-row"><span>2FF1</span><span class="ids-description-symbol">⿱</span><span>ids above to below</span></div><div class="ids-description-row"><span>2FF2</span><span class="ids-description-symbol">⿲</span><span>ids left to middle and right</span></div><div class="ids-description-row"><span>2FF3</span><span class="ids-description-symbol">⿳</span><span>ids above to middle and below</span></div><div class="ids-description-row"><span>2FF4</span><span class="ids-description-symbol">⿴</span><span>ids full surround</span></div><div class="ids-description-row"><span>2FF5</span><span class="ids-description-symbol">⿵</span><span>ids surround from above</span></div></div></div></template>
+<template id="ids-description-continuation"><div class="ids-description"><p class="ids-abbreviation">ids = Ideographic description character</p><div class="ids-description-list"><div class="ids-description-row"><span>2FF6</span><span class="ids-description-symbol">⿶</span><span>ids surround from below</span></div><div class="ids-description-row"><span>2FF7</span><span class="ids-description-symbol">⿷</span><span>ids surround from left</span></div><div class="ids-description-row"><span>2FF8</span><span class="ids-description-symbol">⿸</span><span>ids surround from upper left</span></div><div class="ids-description-row"><span>2FF9</span><span class="ids-description-symbol">⿹</span><span>ids surround from upper right</span></div><div class="ids-description-row"><span>2FFA</span><span class="ids-description-symbol">⿺</span><span>ids surround from lower left</span></div><div class="ids-description-row"><span>2FFB</span><span class="ids-description-symbol">⿻</span><span>ids overlaid</span></div></div></div></template>
 
 <template id="ids-page-4"><div class="ids-flow ids-justified"><div class="ids-letter-row"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="ids-letter-row"><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span></div><div class="ids-letter-row"><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span></div><div class="ids-letter-row"><span>Y</span><span>Z</span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span></div><div class="ids-letter-row"><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span><span>l</span><span>m</span><span>n</span></div><div class="ids-letter-row"><span>o</span><span>p</span><span>q</span><span>r</span><span>s</span><span>t</span><span>u</span><span>v</span></div><div class="ids-letter-row"><span>w</span><span>x</span><span>y</span><span>z</span><span>1</span><span>2</span><span>3</span><span>4</span></div><div class="ids-letter-row"><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span><span>!</span><span>@</span></div><div class="ids-letter-row"><span>#</span><span>$</span><span>%</span><span>&amp;</span><span>*</span><span>+</span><span>=</span></div></div></template>
 <template id="ids-page-5"><div class="ids-flow ids-justified"><div class="ids-specimen-label">Word</div></div></template>
@@ -827,7 +831,29 @@
     }
     function alignDerivationArrows(frame) {
       const chart = frame.querySelector('.self-derivation');
-      if (chart) chart.style.setProperty('--derivation-arrow-x', '13.5cqw');
+      if (!chart) return;
+      const rows = Array.from(chart.querySelectorAll('.derivation-row'));
+      const glyphBounds = rows.map(row => {
+        const range = document.createRange();
+        range.selectNodeContents(row.querySelector('.derivation-glyph'));
+        return range.getBoundingClientRect();
+      });
+      rows.slice(0, -1).forEach((row, index) => {
+        const bounds = row.getBoundingClientRect();
+        const glyph = glyphBounds[index];
+        row.style.setProperty('--arrow-x', `${glyph.left + glyph.width / 2 - bounds.left}px`);
+        row.style.setProperty('--arrow-y', `${(glyph.bottom + glyphBounds[index + 1].top) / 2 - bounds.top}px`);
+      });
+    }
+    function fitMessagePoster(frame) {
+      const poster = frame.querySelector('.page-sheet:not(.outgoing-sheet) .message-poster');
+      if (!poster) return;
+      poster.style.fontSize = '';
+      const size = parseFloat(getComputedStyle(poster).fontSize);
+      const width = Math.max(...Array.from(poster.children, line => line.scrollWidth));
+      const height = poster.scrollHeight;
+      const ratio = Math.min(1, poster.clientWidth / width, poster.clientHeight / height);
+      poster.style.fontSize = `${size * ratio * .98}px`;
     }
     function renderPage(frame, index, slide = 0) {
       const currentPage = Math.max(0, Math.min(titles.length - 1, index));
@@ -939,6 +965,7 @@
       frame.querySelector('.page-content').scrollTop = 0;
       alignDraftCodes(frame);
       alignDerivationArrows(frame);
+      fitMessagePoster(frame);
       layoutNestedCharacters(frame);
       frame.dataset.section = currentPage;
       frame.dataset.slide = currentSlide;
@@ -1169,6 +1196,7 @@
         if (alphabet) alphabet.style.fontSize = `${frameWidth * 0.135}px`;
         alignDraftCodes(frame);
         alignDerivationArrows(frame);
+        fitMessagePoster(frame);
         layoutNestedCharacters(frame);
       });
     }
