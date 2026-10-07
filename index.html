@@ -510,6 +510,20 @@
     .page-sheet[data-section="3"][data-slide="7"] .ids-specimen-label { font-size: 16.2cqw; }
 
     .page-sheet[data-section="3"][data-slide="8"] .ids-flow { font-size: 10.8cqw; }
+
+    @media (max-width: 650px) {
+      .circles {
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 76px;
+        padding: calc(24px + env(safe-area-inset-top, 0px)) 24px 24px;
+        box-sizing: border-box;
+        background: #fff;
+        z-index: 100;
+        isolation: isolate;
+      }
+    }
   </style>
 </head>
 <body>
